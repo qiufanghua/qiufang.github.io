@@ -374,7 +374,7 @@
         
           
             <h1 id="Netty-Resources泄漏检测"><a href="#Netty-Resources泄漏检测" class="headerlink" title="Netty Resources泄漏检测"></a>Netty Resources泄漏检测</h1><p>早前有看到文章介绍Java PhantomReferences(虚引用)可以用来检测资源是否泄漏，但是一直没有找到实际的例子，最近看到Netty源码时发现有用到他检测资源是否泄漏，刚好最近也在强迫自己写博客，希望这只是个开始。下面我按三个方面来进行阐述。</p>
-<h2 id="总体描叙"><a href="#总体描叙" class="headerlink" title="总体描叙"></a>总体描叙</h2><p><img src="../images/java/netty/resource_leak_class_diagram.png" alt="resources leak detector"></p>
+<h2 id="总体描叙"><a href="#总体描叙" class="headerlink" title="总体描叙"></a>总体描叙</h2><p><img src="/images/java/netty/resource_leak_class_diagram.png" alt="resources leak detector"></p>
 <p>Netty DefaultResourceLeak通过继承Java PhantomReference提供额外接口record()记录访问资源的堆栈信息以及提供close()设置引用的资源是否释放，在资源没有强引用时该对象，由垃圾收集器决定何时添加该资源引用到引用队列，通过遍历引用队列，判断引用的资源是否已经释放。</p>
 <h3 id="ResourceLeak"><a href="#ResourceLeak" class="headerlink" title="ResourceLeak"></a>ResourceLeak</h3><p>提供方法record()记录当前方法堆栈信息，我们在访问资源前调用此方法记录当前方法调用堆栈信息，通过工厂方法获取资源时，获取到的是该资源的包装对象，在包装对象中有选择的调用ResourceLeak对象的record方法；在资源释放时调用close()方法，停止对该资源的监控。</p>
 <h3 id="DefaultResourceLeak"><a href="#DefaultResourceLeak" class="headerlink" title="DefaultResourceLeak"></a>DefaultResourceLeak</h3><p>ResourceLeak的默认实现，同时也继承了Java PhantomReference。该对象对应于双向链表的节点，包含前、后节点的引用，检测资源是否释放标识freed以及最近记录的检测资源的方法调用堆栈信息。</p>
