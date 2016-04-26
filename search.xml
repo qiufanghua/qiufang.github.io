@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title><![CDATA[Netty Resource Leak Detector]]></title>
+      <url>https://qiufanghua.github.io/2016/04/27/Netty-Resource-Leak-Detector/</url>
+      <content type="html"><![CDATA[<h1 id="Netty-Resources泄漏检测"><a href="#Netty-Resources泄漏检测" class="headerlink" title="Netty Resources泄漏检测"></a>Netty Resources泄漏检测</h1><p>早前有看到文章介绍Java PhantomReferences(虚引用)可以用来检测资源是否泄漏，但是一直没有找到实际的例子，最近看到Netty源码时发现有用到他检测资源是否泄漏，刚好最近也在强迫自己写博客，希望这只是个开始。下面我按三个方面来进行阐述。</p>
+<h2 id="总体描叙"><a href="#总体描叙" class="headerlink" title="总体描叙"></a>总体描叙</h2><p><img src="../images/java/netty/resource_leak_class_diagram.png" alt="resources leak detector"></p>
+<p>Netty DefaultResourceLeak通过继承Java PhantomReference提供额外接口record()记录访问资源的堆栈信息以及提供close()设置引用的资源是否释放，在资源没有强引用时该对象，由垃圾收集器决定何时添加该资源引用到引用队列，通过遍历引用队列，判断引用的资源是否已经释放。</p>
+<h3 id="ResourceLeak"><a href="#ResourceLeak" class="headerlink" title="ResourceLeak"></a>ResourceLeak</h3><p>提供方法record()记录当前方法堆栈信息，我们在访问资源前调用此方法记录当前方法调用堆栈信息，通过工厂方法获取资源时，获取到的是该资源的包装对象，在包装对象中有选择的调用ResourceLeak对象的record方法；在资源释放时调用close()方法，停止对该资源的监控。</p>
+<h3 id="DefaultResourceLeak"><a href="#DefaultResourceLeak" class="headerlink" title="DefaultResourceLeak"></a>DefaultResourceLeak</h3><p>ResourceLeak的默认实现，同时也继承了Java PhantomReference。该对象对应于双向链表的节点，包含前、后节点的引用，检测资源是否释放标识freed以及最近记录的检测资源的方法调用堆栈信息。</p>
+<h3 id="ResourceLeakDetector"><a href="#ResourceLeakDetector" class="headerlink" title="ResourceLeakDetector"></a>ResourceLeakDetector</h3><p>资源泄漏检测，维护了ResourceLeak的双向链表，通过该对象open(T obj)方法新增DefaultResourceLeak对象跟踪传入的资源，同时遍历引用队列ReferenceQueue<object> refQueue获取DefaultResourceLeak对象检测资源是否释放，如果没有释放打印资源泄漏日志并置ConcurrentMap<string, boolean=""> reportedLeaks标识</string,></object></p>
+<h2 id="流程描叙"><a href="#流程描叙" class="headerlink" title="流程描叙"></a>流程描叙</h2><h2 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h2><h2 id="易忽略点"><a href="#易忽略点" class="headerlink" title="易忽略点"></a>易忽略点</h2><ol>
+<li>当对象没有强引用时，该对象的引用对象Reference会添加到引用队列，引用对象Reference的具体类型是由创建该对象的引用时决定的eg : new DefaultResourceLeak(obj);遍历引用队列时则返回的类型是DefaultResourceLeak对象</li>
+<li>DefaultResourceLeak(Object referent)构造方法有判断referent是否为空，为空则不会被添加到引用队列：super(referent, referent != null? refQueue : null);</li>
+<li>何时来报道资源是否有泄漏。调用ResourceLeakDetector open(T obj)方法时，遍历引用队列。</li>
+<li>何时从引用队列中删除引用。资源释放时会调用DefaultResourceLeak close()方法，会从链表中删除该节点。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">close</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (freed.compareAndSet(<span class="keyword">false</span>, <span class="keyword">true</span>)) &#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (head) &#123;</span><br><span class="line">            active --;</span><br><span class="line">            prev.next = next;</span><br><span class="line">            next.prev = prev;</span><br><span class="line">            prev = <span class="keyword">null</span>;</span><br><span class="line">            next = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Hello World]]></title>
       <url>https://qiufanghua.github.io/2016/04/24/hello-world/</url>
       <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
