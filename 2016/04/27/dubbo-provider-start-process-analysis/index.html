@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="qiufang qiufanghua qiuqiu fangfang huahua Jone" />
+  <meta name="keywords" content="Dubbo," />
 
 
 
@@ -80,15 +80,32 @@
 
 
 
-<meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jone Blog">
-<meta property="og:url" content="https://qiufanghua.github.io/index.html">
+<meta name="description" content="Dubbo简介Dubbo启动过程分析Dubbo是基于Spring容器配置与管理Dubbo服务，我们通过Dubbo提供的Spring命名空间配置Dubbo应用信息，发布的服务，引用的服务等信息，通过Spring容器启动Dubbo服务，下面从分别从服务提供者语消费着详细的介绍下启动过程
+
+Dubbo服务提供者启动过程
+Dubbo配置。通过dubbo namespace配置application，mod">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dubbo provider start process analysis">
+<meta property="og:url" content="https://qiufanghua.github.io/2016/04/27/dubbo-provider-start-process-analysis/index.html">
 <meta property="og:site_name" content="Jone Blog">
-<meta property="og:description">
+<meta property="og:description" content="Dubbo简介Dubbo启动过程分析Dubbo是基于Spring容器配置与管理Dubbo服务，我们通过Dubbo提供的Spring命名空间配置Dubbo应用信息，发布的服务，引用的服务等信息，通过Spring容器启动Dubbo服务，下面从分别从服务提供者语消费着详细的介绍下启动过程
+
+Dubbo服务提供者启动过程
+Dubbo配置。通过dubbo namespace配置application，mod">
+<meta property="og:image" content="https://qiufanghua.github.io/./images/java/dubbo/parser_regester.png">
+<meta property="og:image" content="https://qiufanghua.github.io/./images/java/dubbo/bean_parser.png">
+<meta property="og:image" content="https://qiufanghua.github.io/./images/java/dubbo/service_export.png">
+<meta property="og:image" content="https://qiufanghua.github.io/./images/java/dubbo/JavassistProxyFactory.png">
+<meta property="og:image" content="https://qiufanghua.github.io/./images/dubbo/netty_server.png">
+<meta property="og:image" content="https://qiufanghua.github.io/./images/java/dubbo/extension_module_frame.png">
+<meta property="og:updated_time" content="2016-04-27T04:06:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jone Blog">
-<meta name="twitter:description">
+<meta name="twitter:title" content="dubbo provider start process analysis">
+<meta name="twitter:description" content="Dubbo简介Dubbo启动过程分析Dubbo是基于Spring容器配置与管理Dubbo服务，我们通过Dubbo提供的Spring命名空间配置Dubbo应用信息，发布的服务，引用的服务等信息，通过Spring容器启动Dubbo服务，下面从分别从服务提供者语消费着详细的介绍下启动过程
+
+Dubbo服务提供者启动过程
+Dubbo配置。通过dubbo namespace配置application，mod">
+<meta name="twitter:image" content="https://qiufanghua.github.io/./images/java/dubbo/parser_regester.png">
 
 
 
@@ -106,7 +123,7 @@
   };
 </script>
 
-  <title> Jone Blog </title>
+  <title> dubbo provider start process analysis | Jone Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -137,9 +154,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -266,9 +281,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -288,10 +303,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/04/27/dubbo-provider-start-process-analysis/" itemprop="url">
-                  dubbo provider start process analysis
-                </a>
+                dubbo provider start process analysis
               
             
           </h1>
@@ -378,9 +390,7 @@
       
 
       
-        
-          
-            <h1 id="Dubbo简介"><a href="#Dubbo简介" class="headerlink" title="Dubbo简介"></a>Dubbo简介</h1><h1 id="Dubbo启动过程分析"><a href="#Dubbo启动过程分析" class="headerlink" title="Dubbo启动过程分析"></a>Dubbo启动过程分析</h1><p>Dubbo是基于Spring容器配置与管理Dubbo服务，我们通过Dubbo提供的Spring命名空间配置Dubbo应用信息，发布的服务，引用的服务等信息，通过Spring容器启动Dubbo服务，下面从分别从服务提供者语消费着详细的介绍下启动过程</p>
+        <h1 id="Dubbo简介"><a href="#Dubbo简介" class="headerlink" title="Dubbo简介"></a>Dubbo简介</h1><h1 id="Dubbo启动过程分析"><a href="#Dubbo启动过程分析" class="headerlink" title="Dubbo启动过程分析"></a>Dubbo启动过程分析</h1><p>Dubbo是基于Spring容器配置与管理Dubbo服务，我们通过Dubbo提供的Spring命名空间配置Dubbo应用信息，发布的服务，引用的服务等信息，通过Spring容器启动Dubbo服务，下面从分别从服务提供者语消费着详细的介绍下启动过程</p>
 <hr>
 <h2 id="Dubbo服务提供者启动过程"><a href="#Dubbo服务提供者启动过程" class="headerlink" title="Dubbo服务提供者启动过程"></a>Dubbo服务提供者启动过程</h2><ul>
 <li>Dubbo配置。通过dubbo namespace配置application，module，registry，monitor，provider，consumer，protocol，service，reference，annotation信息（各模块信息参考模块分析章节）。</li>
@@ -432,487 +442,76 @@
 <li>Active注解，类注解，对于可以被框架中自动激活加载扩展，此Annotation用于配置扩展被自动激活加载条件。</li>
 </ul>
 <h3 id="主要类分析"><a href="#主要类分析" class="headerlink" title="主要类分析"></a>主要类分析</h3><h2 id="Registry"><a href="#Registry" class="headerlink" title="Registry"></a>Registry</h2><h2 id="Dubbo服务端"><a href="#Dubbo服务端" class="headerlink" title="Dubbo服务端"></a>Dubbo服务端</h2><h2 id="Dubbo客户端"><a href="#Dubbo客户端" class="headerlink" title="Dubbo客户端"></a>Dubbo客户端</h2><h2 id="Dubbo-Filter"><a href="#Dubbo-Filter" class="headerlink" title="Dubbo Filter"></a>Dubbo Filter</h2><h2 id="Dubbo-Transport"><a href="#Dubbo-Transport" class="headerlink" title="Dubbo Transport"></a>Dubbo Transport</h2>
-          
-        
       
     </div>
     
     <div>
       
+        
+      
     </div>
 
     <div>
+      
+        
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/27/mybatis-and-spring-integrate-analyze/" itemprop="url">
-                  mybatis and spring integrate analyze
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-27T09:59:24+08:00" content="2016-04-27">
-              2016-04-27
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/Mybatis/" itemprop="url" rel="index">
-                    <span itemprop="name">Mybatis</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/Mybatis/Spring/" itemprop="url" rel="index">
-                    <span itemprop="name">Spring</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/27/mybatis-and-spring-integrate-analyze/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/27/mybatis-and-spring-integrate-analyze/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/04/27/mybatis-and-spring-integrate-analyze/" class="leancloud_visitors" data-flag-title="mybatis and spring integrate analyze">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
+            <a href="/tags/Dubbo/" rel="tag">#Dubbo</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <h1 id="Mybatis与Spring集成"><a href="#Mybatis与Spring集成" class="headerlink" title="Mybatis与Spring集成"></a>Mybatis与Spring集成</h1><ul>
-<li>Spring配置文件中配置SqlSessionFactoryBean，启动Mybatis。包括Mybatis参数配置以及Mybatis statement解析。<br><img src="/images/java/mybatis/sqlsessionfactorybean.png" alt="sqlsessionfactorybean"></li>
-<li>配置MapperScannerConfigurer，配置的MapperScanConfigurer在Spring启动时调用ClassPathMapperScanner扫描basePackage包下的接口Mapper，生成BeanDefinition，设置mapperInterface为我们的Mapper接口，设置BeanClass为MapperFactoryBean。<br><img src="/images/java/mybatis/mapper_scan_configurer.png" alt="mapper_scan_configurer"></li>
-<li>Spring自动注入接口Mapper时会调用上一步创建MapperFactoryBean的getObject方法，MapperFactoryBean创建MapperProxy，由改对象代理我们接口方法。</li>
-</ul>
-<h2 id="Spring注入接口Mapper对象过程"><a href="#Spring注入接口Mapper对象过程" class="headerlink" title="Spring注入接口Mapper对象过程"></a>Spring注入接口Mapper对象过程</h2><p><img src="/images/java/mybatis/mapper_sequence.png" alt="mapper_sequence"></p>
-<ul>
-<li>MapperScannerConfigurer，Spring容器调用该类postProcessBeanDefinitionRegistry方法，创建ClassPathMapperScanner实例，根据配置设置该实例，调用ClassPathMapperScanner scan方法</li>
-<li>ClassPathMapperScanner扫描basePackage包下的接口，生成BeanDefinition，设置BeanClass为MapperFactoryBean，并自动注入SqlSessionFactory实例，在注入SqlSessionFactory实例时创建SqlSessionTemplate实例。</li>
-<li>Spring注入接口Mapper时，则调用上一步创建MapperFactoryBean的getObject方法。</li>
-<li>调用SqlSessionTemplate的getMapper方法。</li>
-<li>调用Mybatis的MapperRegistry的getMapper方法。</li>
-<li>创建MapperProxy代理类实例，返回该实例</li>
-</ul>
-<h1 id="接口Mapper查询方法执行过程"><a href="#接口Mapper查询方法执行过程" class="headerlink" title="接口Mapper查询方法执行过程"></a>接口Mapper查询方法执行过程</h1><p>我们以selectByExample为例<br><img src="/images/java/mybatis/mapper_selectByExample.png" alt="mapper_selectByExample"></p>
-<ul>
-<li>调用我们Mapper接口select方法（方法名对应我们的SQL Mapper配置文件的id）</li>
-<li>MapperProxy对象代理我们的方法，创建MapperMethod</li>
-<li>MapperMethod中生成SqlCommand保存SQL命令类型与MappedStatement类型，MethodSignature保存方法签名信息。</li>
-<li>调用SqlSessionTemplate执行selectList方法，改方法会先根据是否配置有事务获取或创建Mybatis SQLSession</li>
-</ul>
-<p>DefaultSqlSession selectList<br><img src="/images/java/mybatis/defaultSqlSession_selectList.png" alt="defaultSqlSession_selectList"></p>
-<ul>
-<li>根据不同的执行类型创建执行器，eg：Batch、Simple以及Reuse执行器</li>
-<li>创建RoutingStatementHander语句处理器</li>
-<li>创建DefaultParameterHandler设置执行的sql参数</li>
-<li>创建DefaultResultSetHandler处理JDBC查询的结果集</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/04/27/mybatis-and-spring-integrate-analyze/" rel="next" title="mybatis and spring integrate analyze">
+                <i class="fa fa-chevron-left"></i> mybatis and spring integrate analyze
+              </a>
             
-              
-                
-                <a class="post-title-link" href="/2016/04/27/Netty-Resource-Leak-Detector/" itemprop="url">
-                  Netty Resource Leak Detector
-                </a>
-              
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
             
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-27T06:54:37+08:00" content="2016-04-27">
-              2016-04-27
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/Netty/" itemprop="url" rel="index">
-                    <span itemprop="name">Netty</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/27/Netty-Resource-Leak-Detector/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/27/Netty-Resource-Leak-Detector/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/04/27/Netty-Resource-Leak-Detector/" class="leancloud_visitors" data-flag-title="Netty Resource Leak Detector">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
+          </div>
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <h1 id="Netty-Resources泄漏检测"><a href="#Netty-Resources泄漏检测" class="headerlink" title="Netty Resources泄漏检测"></a>Netty Resources泄漏检测</h1><p>早前有看到文章介绍Java PhantomReferences(虚引用)可以用来检测资源是否泄漏，但是一直没有找到实际的例子，最近看到Netty源码时发现有用到他检测资源是否泄漏，刚好最近也在强迫自己写博客，希望这只是个开始。下面我按三个方面来进行阐述。</p>
-<h2 id="总体描叙"><a href="#总体描叙" class="headerlink" title="总体描叙"></a>总体描叙</h2><p><img src="/images/java/netty/resource_leak_class_diagram.png" alt="resources leak detector"></p>
-<p>Netty DefaultResourceLeak通过继承Java PhantomReference提供额外接口record()记录访问资源的堆栈信息以及提供close()设置引用的资源是否释放，在资源没有强引用时该对象，由垃圾收集器决定何时添加该资源引用到引用队列，通过遍历引用队列，判断引用的资源是否已经释放。</p>
-<h3 id="ResourceLeak"><a href="#ResourceLeak" class="headerlink" title="ResourceLeak"></a>ResourceLeak</h3><p>提供方法record()记录当前方法堆栈信息，我们在访问资源前调用此方法记录当前方法调用堆栈信息，通过工厂方法获取资源时，获取到的是该资源的包装对象，在包装对象中有选择的调用ResourceLeak对象的record方法；在资源释放时调用close()方法，停止对该资源的监控。</p>
-<h3 id="DefaultResourceLeak"><a href="#DefaultResourceLeak" class="headerlink" title="DefaultResourceLeak"></a>DefaultResourceLeak</h3><p>ResourceLeak的默认实现，同时也继承了Java PhantomReference。该对象对应于双向链表的节点，包含前、后节点的引用，检测资源是否释放标识freed以及最近记录的检测资源的方法调用堆栈信息。</p>
-<h3 id="ResourceLeakDetector"><a href="#ResourceLeakDetector" class="headerlink" title="ResourceLeakDetector"></a>ResourceLeakDetector</h3><p>资源泄漏检测，维护了ResourceLeak的双向链表，通过该对象open(T obj)方法新增DefaultResourceLeak对象跟踪传入的资源，同时遍历引用队列ReferenceQueue<object> refQueue获取DefaultResourceLeak对象检测资源是否释放，如果没有释放打印资源泄漏日志并置ConcurrentMap<string, boolean=""> reportedLeaks标识</string,></object></p>
-<h2 id="流程描叙"><a href="#流程描叙" class="headerlink" title="流程描叙"></a>流程描叙</h2><h2 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h2><h2 id="易忽略点"><a href="#易忽略点" class="headerlink" title="易忽略点"></a>易忽略点</h2><ol>
-<li>当对象没有强引用时，该对象的引用对象Reference会添加到引用队列，引用对象Reference的具体类型是由创建该对象的引用时决定的eg : new DefaultResourceLeak(obj);遍历引用队列时则返回的类型是DefaultResourceLeak对象</li>
-<li>DefaultResourceLeak(Object referent)构造方法有判断referent是否为空，为空则不会被添加到引用队列：super(referent, referent != null? refQueue : null);</li>
-<li>何时来报道资源是否有泄漏。调用ResourceLeakDetector open(T obj)方法时，遍历引用队列。</li>
-<li>何时从引用队列中删除引用。资源释放时会调用DefaultResourceLeak close()方法，会从链表中删除该节点。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">close</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (freed.compareAndSet(<span class="keyword">false</span>, <span class="keyword">true</span>)) &#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (head) &#123;</span><br><span class="line">            active --;</span><br><span class="line">            prev.next = next;</span><br><span class="line">            next.prev = prev;</span><br><span class="line">            prev = <span class="keyword">null</span>;</span><br><span class="line">            next = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
+
+    <div class="post-spread">
       
+        <div class="ds-share flat" data-thread-key="2016/04/27/dubbo-provider-start-process-analysis/"
+     data-title="dubbo provider start process analysis"
+     data-content=""
+     data-url="https://qiufanghua.github.io/2016/04/27/dubbo-provider-start-process-analysis/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
 
-  
-  
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
 
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/24/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-24T10:29:32+08:00" content="2016-04-24">
-              2016-04-24
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/24/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/24/hello-world/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/04/24/hello-world/" class="leancloud_visitors" data-flag-title="Hello World">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-          
-        
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
       
     </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
@@ -920,6 +519,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/27/dubbo-provider-start-process-analysis/"
+           data-title="dubbo provider start process analysis" data-url="https://qiufanghua.github.io/2016/04/27/dubbo-provider-start-process-analysis/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -939,8 +546,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/qiufanghua.png"
@@ -990,6 +606,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Dubbo简介"><span class="nav-number">1.</span> <span class="nav-text">Dubbo简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dubbo启动过程分析"><span class="nav-number">2.</span> <span class="nav-text">Dubbo启动过程分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dubbo服务提供者启动过程"><span class="nav-number">2.1.</span> <span class="nav-text">Dubbo服务提供者启动过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dubbo消费者启动过程"><span class="nav-number">2.2.</span> <span class="nav-text">Dubbo消费者启动过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dubbo主要模块分析"><span class="nav-number">3.</span> <span class="nav-text">Dubbo主要模块分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dubbo扩展模块"><span class="nav-number">3.1.</span> <span class="nav-text">Dubbo扩展模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dubbo很多模块提供了多种实现，在Dubbo配置文件配置对应的属性选择不同的实现类，在发布服务时Dubbo会根据配置的值在URL中添加相应的参数，然后各个模块的Adaptive会根据URL中的参数值选择相应的实现类（如果模块实现类没有Adaptive注解，Dubbo会动态的创建该模块的Adaptive实现类）。"><span class="nav-number">3.2.</span> <span class="nav-text">Dubbo很多模块提供了多种实现，在Dubbo配置文件配置对应的属性选择不同的实现类，在发布服务时Dubbo会根据配置的值在URL中添加相应的参数，然后各个模块的Adaptive会根据URL中的参数值选择相应的实现类（如果模块实现类没有Adaptive注解，Dubbo会动态的创建该模块的Adaptive实现类）。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主要类图"><span class="nav-number">3.2.1.</span> <span class="nav-text">主要类图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主要类分析"><span class="nav-number">3.2.2.</span> <span class="nav-text">主要类分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Registry"><span class="nav-number">3.3.</span> <span class="nav-text">Registry</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dubbo服务端"><span class="nav-number">3.4.</span> <span class="nav-text">Dubbo服务端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dubbo客户端"><span class="nav-number">3.5.</span> <span class="nav-text">Dubbo客户端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dubbo-Filter"><span class="nav-number">3.6.</span> <span class="nav-text">Dubbo Filter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dubbo-Transport"><span class="nav-number">3.7.</span> <span class="nav-text">Dubbo Transport</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -1093,6 +720,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 

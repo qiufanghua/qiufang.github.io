@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="qiufang qiufanghua qiuqiu fangfang huahua Jone" />
+  <meta name="keywords" content="Mybatis,Spring," />
 
 
 
@@ -80,15 +80,28 @@
 
 
 
-<meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jone Blog">
-<meta property="og:url" content="https://qiufanghua.github.io/categories/Java/index.html">
+<meta name="description" content="Mybatis与Spring集成
+Spring配置文件中配置SqlSessionFactoryBean，启动Mybatis。包括Mybatis参数配置以及Mybatis statement解析。
+配置MapperScannerConfigurer，配置的MapperScanConfigurer在Spring启动时调用ClassPathMapperScanner扫描basePackage包下的接口M">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mybatis and spring integrate analyze">
+<meta property="og:url" content="https://qiufanghua.github.io/2016/04/27/mybatis-and-spring-integrate-analyze/index.html">
 <meta property="og:site_name" content="Jone Blog">
-<meta property="og:description">
+<meta property="og:description" content="Mybatis与Spring集成
+Spring配置文件中配置SqlSessionFactoryBean，启动Mybatis。包括Mybatis参数配置以及Mybatis statement解析。
+配置MapperScannerConfigurer，配置的MapperScanConfigurer在Spring启动时调用ClassPathMapperScanner扫描basePackage包下的接口M">
+<meta property="og:image" content="https://qiufanghua.github.io/images/java/mybatis/sqlsessionfactorybean.png">
+<meta property="og:image" content="https://qiufanghua.github.io/images/java/mybatis/mapper_scan_configurer.png">
+<meta property="og:image" content="https://qiufanghua.github.io/images/java/mybatis/mapper_sequence.png">
+<meta property="og:image" content="https://qiufanghua.github.io/images/java/mybatis/mapper_selectByExample.png">
+<meta property="og:image" content="https://qiufanghua.github.io/images/java/mybatis/defaultSqlSession_selectList.png">
+<meta property="og:updated_time" content="2016-04-27T04:03:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jone Blog">
-<meta name="twitter:description">
+<meta name="twitter:title" content="mybatis and spring integrate analyze">
+<meta name="twitter:description" content="Mybatis与Spring集成
+Spring配置文件中配置SqlSessionFactoryBean，启动Mybatis。包括Mybatis参数配置以及Mybatis statement解析。
+配置MapperScannerConfigurer，配置的MapperScanConfigurer在Spring启动时调用ClassPathMapperScanner扫描basePackage包下的接口M">
+<meta name="twitter:image" content="https://qiufanghua.github.io/images/java/mybatis/sqlsessionfactorybean.png">
 
 
 
@@ -106,7 +119,7 @@
   };
 </script>
 
-  <title> 分类: Java | Jone Blog </title>
+  <title> mybatis and spring integrate analyze | Jone Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -137,7 +150,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -265,103 +278,231 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        Java
-        <small>分类</small>
-      </h2>
-    </div>
-
+  <div id="posts" class="posts-expand">
     
-      
-
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/04/27/dubbo-provider-start-process-analysis/" itemprop="url">
-              
-                <span itemprop="name">dubbo provider start process analysis</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-04-27T12:05:16+08:00"
-              content="2016-04-27" >
-          04-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/04/27/mybatis-and-spring-integrate-analyze/" itemprop="url">
-              
-                <span itemprop="name">mybatis and spring integrate analyze</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-04-27T09:59:24+08:00"
-              content="2016-04-27" >
-          04-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/04/27/Netty-Resource-Leak-Detector/" itemprop="url">
-              
-                <span itemprop="name">Netty Resource Leak Detector</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-04-27T06:54:37+08:00"
-              content="2016-04-27" >
-          04-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-  </section>
 
   
+  
 
+  
+  
+  
+
+  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                mybatis and spring integrate analyze
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-27T09:59:24+08:00" content="2016-04-27">
+              2016-04-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/Mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">Mybatis</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/Mybatis/Spring/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/27/mybatis-and-spring-integrate-analyze/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/27/mybatis-and-spring-integrate-analyze/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/04/27/mybatis-and-spring-integrate-analyze/" class="leancloud_visitors" data-flag-title="mybatis and spring integrate analyze">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Mybatis与Spring集成"><a href="#Mybatis与Spring集成" class="headerlink" title="Mybatis与Spring集成"></a>Mybatis与Spring集成</h1><ul>
+<li>Spring配置文件中配置SqlSessionFactoryBean，启动Mybatis。包括Mybatis参数配置以及Mybatis statement解析。<br><img src="/images/java/mybatis/sqlsessionfactorybean.png" alt="sqlsessionfactorybean"></li>
+<li>配置MapperScannerConfigurer，配置的MapperScanConfigurer在Spring启动时调用ClassPathMapperScanner扫描basePackage包下的接口Mapper，生成BeanDefinition，设置mapperInterface为我们的Mapper接口，设置BeanClass为MapperFactoryBean。<br><img src="/images/java/mybatis/mapper_scan_configurer.png" alt="mapper_scan_configurer"></li>
+<li>Spring自动注入接口Mapper时会调用上一步创建MapperFactoryBean的getObject方法，MapperFactoryBean创建MapperProxy，由改对象代理我们接口方法。</li>
+</ul>
+<h2 id="Spring注入接口Mapper对象过程"><a href="#Spring注入接口Mapper对象过程" class="headerlink" title="Spring注入接口Mapper对象过程"></a>Spring注入接口Mapper对象过程</h2><p><img src="/images/java/mybatis/mapper_sequence.png" alt="mapper_sequence"></p>
+<ul>
+<li>MapperScannerConfigurer，Spring容器调用该类postProcessBeanDefinitionRegistry方法，创建ClassPathMapperScanner实例，根据配置设置该实例，调用ClassPathMapperScanner scan方法</li>
+<li>ClassPathMapperScanner扫描basePackage包下的接口，生成BeanDefinition，设置BeanClass为MapperFactoryBean，并自动注入SqlSessionFactory实例，在注入SqlSessionFactory实例时创建SqlSessionTemplate实例。</li>
+<li>Spring注入接口Mapper时，则调用上一步创建MapperFactoryBean的getObject方法。</li>
+<li>调用SqlSessionTemplate的getMapper方法。</li>
+<li>调用Mybatis的MapperRegistry的getMapper方法。</li>
+<li>创建MapperProxy代理类实例，返回该实例</li>
+</ul>
+<h1 id="接口Mapper查询方法执行过程"><a href="#接口Mapper查询方法执行过程" class="headerlink" title="接口Mapper查询方法执行过程"></a>接口Mapper查询方法执行过程</h1><p>我们以selectByExample为例<br><img src="/images/java/mybatis/mapper_selectByExample.png" alt="mapper_selectByExample"></p>
+<ul>
+<li>调用我们Mapper接口select方法（方法名对应我们的SQL Mapper配置文件的id）</li>
+<li>MapperProxy对象代理我们的方法，创建MapperMethod</li>
+<li>MapperMethod中生成SqlCommand保存SQL命令类型与MappedStatement类型，MethodSignature保存方法签名信息。</li>
+<li>调用SqlSessionTemplate执行selectList方法，改方法会先根据是否配置有事务获取或创建Mybatis SQLSession</li>
+</ul>
+<p>DefaultSqlSession selectList<br><img src="/images/java/mybatis/defaultSqlSession_selectList.png" alt="defaultSqlSession_selectList"></p>
+<ul>
+<li>根据不同的执行类型创建执行器，eg：Batch、Simple以及Reuse执行器</li>
+<li>创建RoutingStatementHander语句处理器</li>
+<li>创建DefaultParameterHandler设置执行的sql参数</li>
+<li>创建DefaultResultSetHandler处理JDBC查询的结果集</li>
+</ul>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Mybatis/" rel="tag">#Mybatis</a>
+          
+            <a href="/tags/Spring/" rel="tag">#Spring</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/27/Netty-Resource-Leak-Detector/" rel="next" title="Netty Resource Leak Detector">
+                <i class="fa fa-chevron-left"></i> Netty Resource Leak Detector
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/27/dubbo-provider-start-process-analysis/" rel="prev" title="dubbo provider start process analysis">
+                dubbo provider start process analysis <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/04/27/mybatis-and-spring-integrate-analyze/"
+     data-title="mybatis and spring integrate analyze"
+     data-content=""
+     data-url="https://qiufanghua.github.io/2016/04/27/mybatis-and-spring-integrate-analyze/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
 
 
           </div>
@@ -369,6 +510,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/27/mybatis-and-spring-integrate-analyze/"
+           data-title="mybatis and spring integrate analyze" data-url="https://qiufanghua.github.io/2016/04/27/mybatis-and-spring-integrate-analyze/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -388,8 +537,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/qiufanghua.png"
@@ -439,6 +597,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mybatis与Spring集成"><span class="nav-number">1.</span> <span class="nav-text">Mybatis与Spring集成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring注入接口Mapper对象过程"><span class="nav-number">1.1.</span> <span class="nav-text">Spring注入接口Mapper对象过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#接口Mapper查询方法执行过程"><span class="nav-number">2.</span> <span class="nav-text">接口Mapper查询方法执行过程</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -542,6 +711,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
