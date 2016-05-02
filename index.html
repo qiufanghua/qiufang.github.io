@@ -289,6 +289,268 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/02/dubbo-service-gray-deploy/" itemprop="url">
+                  dubbo service gray deploy
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-02T21:30:06+08:00" content="2016-05-02">
+              2016-05-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/Dubbo/" itemprop="url" rel="index">
+                    <span itemprop="name">Dubbo</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/02/dubbo-service-gray-deploy/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/02/dubbo-service-gray-deploy/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/02/dubbo-service-gray-deploy/" class="leancloud_visitors" data-flag-title="dubbo service gray deploy">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>我们现在的灰度是基于系统级别，是在FCP系统上对所以过来的请求进行拦截，通过请求参数，客服端IP来决定是否能够访问被访问的系统。这控制粒度太大了，没法做到系统的灰度更新以及服务的灰度发布。例如，系统A在机器s1与s2上部署的是v1的版本，在s3与s4上部署的是更新了服务的v2的版本，如果需要企业A只能访问v2的版本，企业B只能访问v1的版本，这种情况现有的灰度系统是无法实现，因此需要我们的灰度系统能够提供基于应用、基于部署到机器、基于服务级别的灰度控制。</p>
+<h1 id="系统结构"><a href="#系统结构" class="headerlink" title="系统结构"></a>系统结构</h1><p><img src="/images/java/dubbo/gray_servcie_architect.png" alt="gray architet" title="gray architet"></p>
+<h1 id="系统模块"><a href="#系统模块" class="headerlink" title="系统模块"></a>系统模块</h1><h2 id="灰度客户端"><a href="#灰度客户端" class="headerlink" title="灰度客户端"></a>灰度客户端</h2><p>起初我们想通过扩展Dubbo的服务路由器，添加基于请求参数的路由器，这样在Dubbo服务调用时加入我们的灰度逻辑，过滤不符合条件的远程服务，达到服务地灰度发布。但是这种实现是基于Dubbo服务来配置路由规则，如果我们需要提供基于应用级别的灰度，我们需要为该应用暴露所有服务都添加路由规则，以便我们Dubbo服务引用者能够接收到对应服务的路由规则。这有两个弊端，一是，频繁的设置Dubbo服务影响性能；二是：服务路由配置信息会推送到所有的客服端，即使他没有添加灰度控制，这有些不合理。<br>因此我们采用如下方案：<br>引用Dubbo服务时，Dubbo返回Invoker对象引用远程服务，在请求服务时会根据我们Invocation(服务请求信息)调用Invoker关联的Directory的服务查找方法，通过代理Directory的服务查找方法，添加我们的灰度逻辑。</p>
+<h3 id="Dubbo服务查找拦截"><a href="#Dubbo服务查找拦截" class="headerlink" title="Dubbo服务查找拦截"></a>Dubbo服务查找拦截</h3><ol>
+<li>添加Cluster Wrapper类。添加此类提供代理Directory的入口。</li>
+</ol>
+<pre><code>public class GrayServiceClusterWrapper implements Cluster {
+
+private final Cluster cluster;
+
+// Dubbo will inject properties which have associated setting method by SpringExtenstionFactory,
+// which uses property name lookup bean in spring context.
+private GrayControlService grayControlService;
+
+public GrayServiceClusterWrapper(final Cluster cluster) {
+    if (cluster == null) {
+        throw new IllegalArgumentException(&quot;cluster == null&quot;);
+    }
+    this.cluster = cluster;
+}
+
+@Override
+public &lt;T&gt; Invoker&lt;T&gt; join(Directory&lt;T&gt; directory) throws RpcException {
+
+    if (grayControlService == null) {
+        return cluster.join(directory);
+    }
+
+    // proxy directory list method and add gray logic
+    return cluster.join(DirectoryProxyFactory.getProxy(directory, grayControlService));
+}
+
+public static class DirectoryProxyFactory {
+
+    private static final Class&lt;?&gt;[] interfaces = new Class[1];
+    static {
+        interfaces[0] = Directory.class;
+    }
+
+    public static &lt;T&gt; Directory&lt;T&gt; getProxy(Directory&lt;T&gt; directory, GrayControlService grayControlService) {
+        return (Directory&lt;T&gt;) Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(), interfaces, new  DirectoryInvocationHandler(directory, grayControlService));
+    }
+}
+
+public static class DirectoryInvocationHandler&lt;T&gt; implements InvocationHandler {
+
+    private final Directory&lt;T&gt; directory;
+    private final GrayControlService grayControlService;
+
+    public DirectoryInvocationHandler(Directory&lt;T&gt; directory, GrayControlService grayControlService) {
+        this.directory = directory;
+        this.grayControlService = grayControlService;
+    }
+
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+
+        String methodName = method.getName();
+        Class&lt;?&gt;[] parameterTypes = method.getParameterTypes();
+
+        // user proxy object method
+        if (&quot;list&quot;.equals(methodName) &amp;&amp; parameterTypes != null &amp;&amp; parameterTypes.length == 1 &amp;&amp; parameterTypes[0] == Invocation.class) {
+
+            Invocation invocation = (Invocation) args[0];
+            URL consumerUrl;
+            // first we list all available invokers then we filter it by gray service
+            if (AbstractDirectory.class.isAssignableFrom(directory.getClass())) {
+                AbstractDirectory absDirectory = (AbstractDirectory) directory;
+                consumerUrl = absDirectory.getConsumerUrl();
+            } else {
+                String interfaceName = directory.getInterface().getName();
+                consumerUrl = new URL(Constants.CONSUMER_PROTOCOL, NetUtils.getLocalHost(), 0, interfaceName, directory.getUrl().getParameters());
+            }
+
+            List&lt;Invoker&lt;T&gt;&gt; invokers = directory.list(invocation);
+
+            return grayControlService.grayFilter(invokers, consumerUrl, invocation);
+
+        } else if (&quot;getUrl&quot;.equals(methodName)) {
+            return directory.getUrl();
+        } else if (&quot;isAvailable&quot;.equals(methodName)) {
+            return directory.isAvailable();
+        } else if (&quot;destroy&quot;.equals(methodName)) {
+            directory.destroy();
+            return null;
+        } else {
+            return method.invoke(proxy, args);
+        }
+    }
+}
+
+public GrayControlService getGrayControlService() {
+    return grayControlService;
+}
+
+public void setGrayControlService(GrayControlService grayControlService) {
+    this.grayControlService = grayControlService;
+    }
+}
+</code></pre><ol>
+<li>添加DirectoryInvocationHandler。代理Directory的服务查找方法，加入灰度控制逻辑。</li>
+<li>实现灰度控制逻辑</li>
+</ol>
+<h3 id="灰度配置监听"><a href="#灰度配置监听" class="headerlink" title="灰度配置监听"></a>灰度配置监听</h3><p>实时的接受灰度配置信息，灰度控制基于此配置信息进行灰度判断。监听目录／fs_gray</p>
+<h2 id="灰度管理系统"><a href="#灰度管理系统" class="headerlink" title="灰度管理系统"></a>灰度管理系统</h2><h3 id="Dubbo服务监听"><a href="#Dubbo服务监听" class="headerlink" title="Dubbo服务监听"></a>Dubbo服务监听</h3><p>灰度系统需要能够发现我们所有的服务提供者，Dubbo并没有提供基于应用或者时基于机器的服务查找，因此我们需要监听所有服务，以便能发现服务，对收到的服务提供者信息进行封装后，供后续的服务查询。</p>
+<h3 id="Dubbo服务查询"><a href="#Dubbo服务查询" class="headerlink" title="Dubbo服务查询"></a>Dubbo服务查询</h3><ol>
+<li>根据应用名称查询服务地址列表。</li>
+<li>根据服务地址查询服务列表。</li>
+</ol>
+<h3 id="灰度配置"><a href="#灰度配置" class="headerlink" title="灰度配置"></a>灰度配置</h3><ol>
+<li>根据应用配置灰度。</li>
+<li>根据服务地址配置灰度。</li>
+<li>根据服务配置灰度。</li>
+</ol>
+<p><strong>灰度配置在zk的目录结构</strong></p>
+<ol>
+<li>应用级别的灰度配置目录<br>／fs_gray/{application_name}</li>
+<li>服务地址级别的灰度配置目录<br>/fs_gray/{appliation_name}/{service_address}</li>
+<li>服务级别的灰度配置目录<br>／fs_gray/{application_name}/{service_address}/{service_url}</li>
+</ol>
+<p><strong>灰度配置数据结构</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对应配置级别是否可用。eg：在应用级别配置该属性false，表示该引用不可用</span></span><br><span class="line"><span class="keyword">boolean</span> available;</span><br><span class="line"><span class="comment">// 访问者白名单地址</span></span><br><span class="line">List&lt;String&gt; ipWhiteList;</span><br><span class="line">List&lt;String&gt; ipBlackList;</span><br><span class="line">List&lt;String&gt; enterpriseWhiteList;</span><br><span class="line">List&lt;String&gt; enterpriseBlackList;</span><br><span class="line">List&lt;String&gt; userIdWhiteList;</span><br><span class="line">List&lt;String&gt; userIdBlackList;</span><br><span class="line"><span class="comment">// 访问百分比</span></span><br><span class="line">Integer percent;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/27/dubbo-provider-start-process-analysis/" itemprop="url">
                   dubbo provider start process analysis
                 </a>
@@ -961,7 +1223,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
