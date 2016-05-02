@@ -391,7 +391,7 @@
 <li>添加DirectoryInvocationHandler。代理Directory的服务查找方法，加入灰度控制逻辑。</li>
 <li>实现灰度控制逻辑</li>
 </ol>
-<h3 id="灰度配置监听"><a href="#灰度配置监听" class="headerlink" title="灰度配置监听"></a>灰度配置监听</h3><p>实时的接受灰度配置信息，灰度控制基于此配置信息进行灰度判断。监听目录／fs_gray</p>
+<h3 id="灰度配置信息监听"><a href="#灰度配置信息监听" class="headerlink" title="灰度配置信息监听"></a>灰度配置信息监听</h3><p>实时的接受灰度配置信息，灰度控制基于此配置信息进行灰度判断。监听目录／fs_gray</p>
 <h2 id="灰度管理系统"><a href="#灰度管理系统" class="headerlink" title="灰度管理系统"></a>灰度管理系统</h2><h3 id="Dubbo服务监听"><a href="#Dubbo服务监听" class="headerlink" title="Dubbo服务监听"></a>Dubbo服务监听</h3><p>灰度系统需要能够发现我们所有的服务提供者，Dubbo并没有提供基于应用或者时基于机器的服务查找，因此我们需要监听所有服务，以便能发现服务，对收到的服务提供者信息进行封装后，供后续的服务查询。</p>
 <h3 id="Dubbo服务查询"><a href="#Dubbo服务查询" class="headerlink" title="Dubbo服务查询"></a>Dubbo服务查询</h3><ol>
 <li>根据应用名称查询服务地址列表。</li>

@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Jone Blog">
 <meta property="og:description" content="背景我们现在的灰度是基于系统级别，是在FCP系统上对所以过来的请求进行拦截，通过请求参数，客服端IP来决定是否能够访问被访问的系统。这控制粒度太大了，没法做到系统的灰度更新以及服务的灰度发布。例如，系统A在机器s1与s2上部署的是v1的版本，在s3与s4上部署的是更新了服务的v2的版本，如果需要企业A只能访问v2的版本，企业B只能访问v1的版本，这种情况现有的灰度系统是无法实现，因此需要我们的灰度">
 <meta property="og:image" content="https://qiufanghua.github.io/images/java/dubbo/gray_servcie_architect.png">
-<meta property="og:updated_time" content="2016-05-02T13:36:42.000Z">
+<meta property="og:updated_time" content="2016-05-02T13:37:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="dubbo service gray deploy">
 <meta name="twitter:description" content="背景我们现在的灰度是基于系统级别，是在FCP系统上对所以过来的请求进行拦截，通过请求参数，客服端IP来决定是否能够访问被访问的系统。这控制粒度太大了，没法做到系统的灰度更新以及服务的灰度发布。例如，系统A在机器s1与s2上部署的是v1的版本，在s3与s4上部署的是更新了服务的v2的版本，如果需要企业A只能访问v2的版本，企业B只能访问v1的版本，这种情况现有的灰度系统是无法实现，因此需要我们的灰度">
@@ -387,7 +387,7 @@
 <li>添加DirectoryInvocationHandler。代理Directory的服务查找方法，加入灰度控制逻辑。</li>
 <li>实现灰度控制逻辑</li>
 </ol>
-<h3 id="灰度配置监听"><a href="#灰度配置监听" class="headerlink" title="灰度配置监听"></a>灰度配置监听</h3><p>实时的接受灰度配置信息，灰度控制基于此配置信息进行灰度判断。监听目录／fs_gray</p>
+<h3 id="灰度配置信息监听"><a href="#灰度配置信息监听" class="headerlink" title="灰度配置信息监听"></a>灰度配置信息监听</h3><p>实时的接受灰度配置信息，灰度控制基于此配置信息进行灰度判断。监听目录／fs_gray</p>
 <h2 id="灰度管理系统"><a href="#灰度管理系统" class="headerlink" title="灰度管理系统"></a>灰度管理系统</h2><h3 id="Dubbo服务监听"><a href="#Dubbo服务监听" class="headerlink" title="Dubbo服务监听"></a>Dubbo服务监听</h3><p>灰度系统需要能够发现我们所有的服务提供者，Dubbo并没有提供基于应用或者时基于机器的服务查找，因此我们需要监听所有服务，以便能发现服务，对收到的服务提供者信息进行封装后，供后续的服务查询。</p>
 <h3 id="Dubbo服务查询"><a href="#Dubbo服务查询" class="headerlink" title="Dubbo服务查询"></a>Dubbo服务查询</h3><ol>
 <li>根据应用名称查询服务地址列表。</li>
@@ -578,7 +578,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#系统结构"><span class="nav-number">2.</span> <span class="nav-text">系统结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#系统模块"><span class="nav-number">3.</span> <span class="nav-text">系统模块</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#灰度客户端"><span class="nav-number">3.1.</span> <span class="nav-text">灰度客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dubbo服务查找拦截"><span class="nav-number">3.1.1.</span> <span class="nav-text">Dubbo服务查找拦截</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#灰度配置监听"><span class="nav-number">3.1.2.</span> <span class="nav-text">灰度配置监听</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#灰度管理系统"><span class="nav-number">3.2.</span> <span class="nav-text">灰度管理系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dubbo服务监听"><span class="nav-number">3.2.1.</span> <span class="nav-text">Dubbo服务监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dubbo服务查询"><span class="nav-number">3.2.2.</span> <span class="nav-text">Dubbo服务查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#灰度配置"><span class="nav-number">3.2.3.</span> <span class="nav-text">灰度配置</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#系统结构"><span class="nav-number">2.</span> <span class="nav-text">系统结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#系统模块"><span class="nav-number">3.</span> <span class="nav-text">系统模块</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#灰度客户端"><span class="nav-number">3.1.</span> <span class="nav-text">灰度客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dubbo服务查找拦截"><span class="nav-number">3.1.1.</span> <span class="nav-text">Dubbo服务查找拦截</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#灰度配置信息监听"><span class="nav-number">3.1.2.</span> <span class="nav-text">灰度配置信息监听</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#灰度管理系统"><span class="nav-number">3.2.</span> <span class="nav-text">灰度管理系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dubbo服务监听"><span class="nav-number">3.2.1.</span> <span class="nav-text">Dubbo服务监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dubbo服务查询"><span class="nav-number">3.2.2.</span> <span class="nav-text">Dubbo服务查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#灰度配置"><span class="nav-number">3.2.3.</span> <span class="nav-text">灰度配置</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>
