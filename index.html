@@ -381,7 +381,7 @@
         
           
             <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>我们现在的灰度是基于系统级别，是在FCP系统上对所以过来的请求进行拦截，通过请求参数，客服端IP来决定是否能够访问被访问的系统。这控制粒度太大了，没法做到系统的灰度更新以及服务的灰度发布。例如，系统A在机器s1与s2上部署的是v1的版本，在s3与s4上部署的是更新了服务的v2的版本，如果需要企业A只能访问v2的版本，企业B只能访问v1的版本，这种情况现有的灰度系统是无法实现，因此需要我们的灰度系统能够提供基于应用、基于部署到机器、基于服务级别的灰度控制。</p>
-<h1 id="系统结构"><a href="#系统结构" class="headerlink" title="系统结构"></a>系统结构</h1><p><img src="/images/java/dubbo/gray_servcie_architect.png" alt="gray architet" title="gray architet"></p>
+<h1 id="系统结构"><a href="#系统结构" class="headerlink" title="系统结构"></a>系统结构</h1><p><img src="/images/java/dubbo/gray_servcie_architect.png" alt="gray architect" title="gray architect"></p>
 <h1 id="系统模块"><a href="#系统模块" class="headerlink" title="系统模块"></a>系统模块</h1><h2 id="灰度客户端"><a href="#灰度客户端" class="headerlink" title="灰度客户端"></a>灰度客户端</h2><p>起初我们想通过扩展Dubbo的服务路由器，添加基于请求参数的路由器，这样在Dubbo服务调用时加入我们的灰度逻辑，过滤不符合条件的远程服务，达到服务地灰度发布。但是这种实现是基于Dubbo服务来配置路由规则，如果我们需要提供基于应用级别的灰度，我们需要为该应用暴露所有服务都添加路由规则，以便我们Dubbo服务引用者能够接收到对应服务的路由规则。这有两个弊端，一是，频繁的设置Dubbo服务影响性能；二是：服务路由配置信息会推送到所有的客服端，即使他没有添加灰度控制，这有些不合理。<br>因此我们采用如下方案：<br>引用Dubbo服务时，Dubbo返回Invoker对象引用远程服务，在请求服务时会根据我们Invocation(服务请求信息)调用Invoker关联的Directory的服务查找方法，通过代理Directory的服务查找方法，添加我们的灰度逻辑。</p>
 <h3 id="Dubbo服务查找拦截"><a href="#Dubbo服务查找拦截" class="headerlink" title="Dubbo服务查找拦截"></a>Dubbo服务查找拦截</h3><ul>
 <li>添加Cluster Wrapper类。添加此类提供代理Directory的入口。</li>
