@@ -82,28 +82,25 @@
 
 
 
-<meta name="description" content="Mybatis与Spring集成
-Spring配置文件中配置SqlSessionFactoryBean，启动Mybatis。包括Mybatis参数配置以及Mybatis statement解析。
-配置MapperScannerConfigurer，配置的MapperScanConfigurer在Spring启动时调用ClassPathMapperScanner扫描basePackage包下的接口M">
+<meta name="description" content="Mybatis&amp;#x4E0E;Spring&amp;#x96C6;&amp;#x6210;
+Spring&amp;#x914D;&amp;#x7F6E;&amp;#x6587;&amp;#x4EF6;&amp;#x4E2D;&amp;#x914D;&amp;#x7F6E;SqlSessionFactoryBean&amp;#xFF0C;&amp;#x542F;&amp;#x52A8;Mybatis&amp;#x3002;&amp;#x5305;&amp;#x62EC;Mybatis&amp;#x53C2;&amp;#x6570;&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mybatis and spring integrate analyze">
 <meta property="og:url" content="https://qiufanghua.github.io/2016/04/27/mybatis-and-spring-integrate-analyze/index.html">
 <meta property="og:site_name" content="Jone Blog">
-<meta property="og:description" content="Mybatis与Spring集成
-Spring配置文件中配置SqlSessionFactoryBean，启动Mybatis。包括Mybatis参数配置以及Mybatis statement解析。
-配置MapperScannerConfigurer，配置的MapperScanConfigurer在Spring启动时调用ClassPathMapperScanner扫描basePackage包下的接口M">
-<meta property="og:image" content="https://qiufanghua.github.io/images/java/mybatis/sqlsessionfactorybean.png">
-<meta property="og:image" content="https://qiufanghua.github.io/images/java/mybatis/mapper_scan_configurer.png">
-<meta property="og:image" content="https://qiufanghua.github.io/images/java/mybatis/mapper_sequence.png">
-<meta property="og:image" content="https://qiufanghua.github.io/images/java/mybatis/mapper_selectByExample.png">
-<meta property="og:image" content="https://qiufanghua.github.io/images/java/mybatis/defaultSqlSession_selectList.png">
+<meta property="og:description" content="Mybatis&amp;#x4E0E;Spring&amp;#x96C6;&amp;#x6210;
+Spring&amp;#x914D;&amp;#x7F6E;&amp;#x6587;&amp;#x4EF6;&amp;#x4E2D;&amp;#x914D;&amp;#x7F6E;SqlSessionFactoryBean&amp;#xFF0C;&amp;#x542F;&amp;#x52A8;Mybatis&amp;#x3002;&amp;#x5305;&amp;#x62EC;Mybatis&amp;#x53C2;&amp;#x6570;&amp;">
+<meta property="og:image" content="https://qiufanghua.github.io/2016/04/27/mybatis-and-spring-integrate-analyze/sqlsessionfactorybean.png">
+<meta property="og:image" content="https://qiufanghua.github.io/2016/04/27/mybatis-and-spring-integrate-analyze/mapper_scan_configurer.png">
+<meta property="og:image" content="https://qiufanghua.github.io/2016/04/27/mybatis-and-spring-integrate-analyze/mapper_sequence.png">
+<meta property="og:image" content="https://qiufanghua.github.io/2016/04/27/mybatis-and-spring-integrate-analyze/mapper_selectByExample.png">
+<meta property="og:image" content="https://qiufanghua.github.io/2016/04/27/mybatis-and-spring-integrate-analyze/defaultSqlSession_selectList.png">
 <meta property="og:updated_time" content="2016-04-27T04:19:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis and spring integrate analyze">
-<meta name="twitter:description" content="Mybatis与Spring集成
-Spring配置文件中配置SqlSessionFactoryBean，启动Mybatis。包括Mybatis参数配置以及Mybatis statement解析。
-配置MapperScannerConfigurer，配置的MapperScanConfigurer在Spring启动时调用ClassPathMapperScanner扫描basePackage包下的接口M">
-<meta name="twitter:image" content="https://qiufanghua.github.io/images/java/mybatis/sqlsessionfactorybean.png">
+<meta name="twitter:description" content="Mybatis&amp;#x4E0E;Spring&amp;#x96C6;&amp;#x6210;
+Spring&amp;#x914D;&amp;#x7F6E;&amp;#x6587;&amp;#x4EF6;&amp;#x4E2D;&amp;#x914D;&amp;#x7F6E;SqlSessionFactoryBean&amp;#xFF0C;&amp;#x542F;&amp;#x52A8;Mybatis&amp;#x3002;&amp;#x5305;&amp;#x62EC;Mybatis&amp;#x53C2;&amp;#x6570;&amp;">
+<meta name="twitter:image" content="https://qiufanghua.github.io/2016/04/27/mybatis-and-spring-integrate-analyze/sqlsessionfactorybean.png">
 
 
 
@@ -388,33 +385,33 @@ Spring配置文件中配置SqlSessionFactoryBean，启动Mybatis。包括Mybatis
       
 
       
-        <h1 id="Mybatis与Spring集成"><a href="#Mybatis与Spring集成" class="headerlink" title="Mybatis与Spring集成"></a>Mybatis与Spring集成</h1><ul>
-<li>Spring配置文件中配置SqlSessionFactoryBean，启动Mybatis。包括Mybatis参数配置以及Mybatis statement解析。<br><img src="/images/java/mybatis/sqlsessionfactorybean.png" alt="sqlsessionfactorybean"></li>
-<li>配置MapperScannerConfigurer，配置的MapperScanConfigurer在Spring启动时调用ClassPathMapperScanner扫描basePackage包下的接口Mapper，生成BeanDefinition，设置mapperInterface为我们的Mapper接口，设置BeanClass为MapperFactoryBean。<br><img src="/images/java/mybatis/mapper_scan_configurer.png" alt="mapper_scan_configurer"></li>
-<li>Spring自动注入接口Mapper时会调用上一步创建MapperFactoryBean的getObject方法，MapperFactoryBean创建MapperProxy，由改对象代理我们接口方法。</li>
+        <h1 id="Mybatis&#x4E0E;Spring&#x96C6;&#x6210;"><a href="#Mybatis&#x4E0E;Spring&#x96C6;&#x6210;" class="headerlink" title="Mybatis&#x4E0E;Spring&#x96C6;&#x6210;"></a>Mybatis&#x4E0E;Spring&#x96C6;&#x6210;</h1><ul>
+<li>Spring&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x914D;&#x7F6E;SqlSessionFactoryBean&#xFF0C;&#x542F;&#x52A8;Mybatis&#x3002;&#x5305;&#x62EC;Mybatis&#x53C2;&#x6570;&#x914D;&#x7F6E;&#x4EE5;&#x53CA;Mybatis statement&#x89E3;&#x6790;&#x3002;<br><img src="/2016/04/27/mybatis-and-spring-integrate-analyze/sqlsessionfactorybean.png" alt="sqlsessionfactorybean"></li>
+<li>&#x914D;&#x7F6E;MapperScannerConfigurer&#xFF0C;&#x914D;&#x7F6E;&#x7684;MapperScanConfigurer&#x5728;Spring&#x542F;&#x52A8;&#x65F6;&#x8C03;&#x7528;ClassPathMapperScanner&#x626B;&#x63CF;basePackage&#x5305;&#x4E0B;&#x7684;&#x63A5;&#x53E3;Mapper&#xFF0C;&#x751F;&#x6210;BeanDefinition&#xFF0C;&#x8BBE;&#x7F6E;mapperInterface&#x4E3A;&#x6211;&#x4EEC;&#x7684;Mapper&#x63A5;&#x53E3;&#xFF0C;&#x8BBE;&#x7F6E;BeanClass&#x4E3A;MapperFactoryBean&#x3002;<br><img src="/2016/04/27/mybatis-and-spring-integrate-analyze/mapper_scan_configurer.png" alt="mapper_scan_configurer"></li>
+<li>Spring&#x81EA;&#x52A8;&#x6CE8;&#x5165;&#x63A5;&#x53E3;Mapper&#x65F6;&#x4F1A;&#x8C03;&#x7528;&#x4E0A;&#x4E00;&#x6B65;&#x521B;&#x5EFA;MapperFactoryBean&#x7684;getObject&#x65B9;&#x6CD5;&#xFF0C;MapperFactoryBean&#x521B;&#x5EFA;MapperProxy&#xFF0C;&#x7531;&#x6539;&#x5BF9;&#x8C61;&#x4EE3;&#x7406;&#x6211;&#x4EEC;&#x63A5;&#x53E3;&#x65B9;&#x6CD5;&#x3002;</li>
 </ul>
-<h2 id="Spring注入接口Mapper对象过程"><a href="#Spring注入接口Mapper对象过程" class="headerlink" title="Spring注入接口Mapper对象过程"></a>Spring注入接口Mapper对象过程</h2><p><img src="/images/java/mybatis/mapper_sequence.png" alt="mapper_sequence"></p>
+<h2 id="Spring&#x6CE8;&#x5165;&#x63A5;&#x53E3;Mapper&#x5BF9;&#x8C61;&#x8FC7;&#x7A0B;"><a href="#Spring&#x6CE8;&#x5165;&#x63A5;&#x53E3;Mapper&#x5BF9;&#x8C61;&#x8FC7;&#x7A0B;" class="headerlink" title="Spring&#x6CE8;&#x5165;&#x63A5;&#x53E3;Mapper&#x5BF9;&#x8C61;&#x8FC7;&#x7A0B;"></a>Spring&#x6CE8;&#x5165;&#x63A5;&#x53E3;Mapper&#x5BF9;&#x8C61;&#x8FC7;&#x7A0B;</h2><p><img src="/2016/04/27/mybatis-and-spring-integrate-analyze/mapper_sequence.png" alt="mapper_sequence"></p>
 <ul>
-<li>MapperScannerConfigurer，Spring容器调用该类postProcessBeanDefinitionRegistry方法，创建ClassPathMapperScanner实例，根据配置设置该实例，调用ClassPathMapperScanner scan方法</li>
-<li>ClassPathMapperScanner扫描basePackage包下的接口，生成BeanDefinition，设置BeanClass为MapperFactoryBean，并自动注入SqlSessionFactory实例，在注入SqlSessionFactory实例时创建SqlSessionTemplate实例。</li>
-<li>Spring注入接口Mapper时，则调用上一步创建MapperFactoryBean的getObject方法。</li>
-<li>调用SqlSessionTemplate的getMapper方法。</li>
-<li>调用Mybatis的MapperRegistry的getMapper方法。</li>
-<li>创建MapperProxy代理类实例，返回该实例</li>
+<li>MapperScannerConfigurer&#xFF0C;Spring&#x5BB9;&#x5668;&#x8C03;&#x7528;&#x8BE5;&#x7C7B;postProcessBeanDefinitionRegistry&#x65B9;&#x6CD5;&#xFF0C;&#x521B;&#x5EFA;ClassPathMapperScanner&#x5B9E;&#x4F8B;&#xFF0C;&#x6839;&#x636E;&#x914D;&#x7F6E;&#x8BBE;&#x7F6E;&#x8BE5;&#x5B9E;&#x4F8B;&#xFF0C;&#x8C03;&#x7528;ClassPathMapperScanner scan&#x65B9;&#x6CD5;</li>
+<li>ClassPathMapperScanner&#x626B;&#x63CF;basePackage&#x5305;&#x4E0B;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x751F;&#x6210;BeanDefinition&#xFF0C;&#x8BBE;&#x7F6E;BeanClass&#x4E3A;MapperFactoryBean&#xFF0C;&#x5E76;&#x81EA;&#x52A8;&#x6CE8;&#x5165;SqlSessionFactory&#x5B9E;&#x4F8B;&#xFF0C;&#x5728;&#x6CE8;&#x5165;SqlSessionFactory&#x5B9E;&#x4F8B;&#x65F6;&#x521B;&#x5EFA;SqlSessionTemplate&#x5B9E;&#x4F8B;&#x3002;</li>
+<li>Spring&#x6CE8;&#x5165;&#x63A5;&#x53E3;Mapper&#x65F6;&#xFF0C;&#x5219;&#x8C03;&#x7528;&#x4E0A;&#x4E00;&#x6B65;&#x521B;&#x5EFA;MapperFactoryBean&#x7684;getObject&#x65B9;&#x6CD5;&#x3002;</li>
+<li>&#x8C03;&#x7528;SqlSessionTemplate&#x7684;getMapper&#x65B9;&#x6CD5;&#x3002;</li>
+<li>&#x8C03;&#x7528;Mybatis&#x7684;MapperRegistry&#x7684;getMapper&#x65B9;&#x6CD5;&#x3002;</li>
+<li>&#x521B;&#x5EFA;MapperProxy&#x4EE3;&#x7406;&#x7C7B;&#x5B9E;&#x4F8B;&#xFF0C;&#x8FD4;&#x56DE;&#x8BE5;&#x5B9E;&#x4F8B;</li>
 </ul>
-<h1 id="接口Mapper查询方法执行过程"><a href="#接口Mapper查询方法执行过程" class="headerlink" title="接口Mapper查询方法执行过程"></a>接口Mapper查询方法执行过程</h1><p>我们以selectByExample为例<br><img src="/images/java/mybatis/mapper_selectByExample.png" alt="mapper_selectByExample"></p>
+<h1 id="&#x63A5;&#x53E3;Mapper&#x67E5;&#x8BE2;&#x65B9;&#x6CD5;&#x6267;&#x884C;&#x8FC7;&#x7A0B;"><a href="#&#x63A5;&#x53E3;Mapper&#x67E5;&#x8BE2;&#x65B9;&#x6CD5;&#x6267;&#x884C;&#x8FC7;&#x7A0B;" class="headerlink" title="&#x63A5;&#x53E3;Mapper&#x67E5;&#x8BE2;&#x65B9;&#x6CD5;&#x6267;&#x884C;&#x8FC7;&#x7A0B;"></a>&#x63A5;&#x53E3;Mapper&#x67E5;&#x8BE2;&#x65B9;&#x6CD5;&#x6267;&#x884C;&#x8FC7;&#x7A0B;</h1><p>&#x6211;&#x4EEC;&#x4EE5;selectByExample&#x4E3A;&#x4F8B;<br><img src="/2016/04/27/mybatis-and-spring-integrate-analyze/mapper_selectByExample.png" alt="mapper_selectByExample"></p>
 <ul>
-<li>调用我们Mapper接口select方法（方法名对应我们的SQL Mapper配置文件的id）</li>
-<li>MapperProxy对象代理我们的方法，创建MapperMethod</li>
-<li>MapperMethod中生成SqlCommand保存SQL命令类型与MappedStatement类型，MethodSignature保存方法签名信息。</li>
-<li>调用SqlSessionTemplate执行selectList方法，改方法会先根据是否配置有事务获取或创建Mybatis SQLSession</li>
+<li>&#x8C03;&#x7528;&#x6211;&#x4EEC;Mapper&#x63A5;&#x53E3;select&#x65B9;&#x6CD5;&#xFF08;&#x65B9;&#x6CD5;&#x540D;&#x5BF9;&#x5E94;&#x6211;&#x4EEC;&#x7684;SQL Mapper&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;id&#xFF09;</li>
+<li>MapperProxy&#x5BF9;&#x8C61;&#x4EE3;&#x7406;&#x6211;&#x4EEC;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x521B;&#x5EFA;MapperMethod</li>
+<li>MapperMethod&#x4E2D;&#x751F;&#x6210;SqlCommand&#x4FDD;&#x5B58;SQL&#x547D;&#x4EE4;&#x7C7B;&#x578B;&#x4E0E;MappedStatement&#x7C7B;&#x578B;&#xFF0C;MethodSignature&#x4FDD;&#x5B58;&#x65B9;&#x6CD5;&#x7B7E;&#x540D;&#x4FE1;&#x606F;&#x3002;</li>
+<li>&#x8C03;&#x7528;SqlSessionTemplate&#x6267;&#x884C;selectList&#x65B9;&#x6CD5;&#xFF0C;&#x6539;&#x65B9;&#x6CD5;&#x4F1A;&#x5148;&#x6839;&#x636E;&#x662F;&#x5426;&#x914D;&#x7F6E;&#x6709;&#x4E8B;&#x52A1;&#x83B7;&#x53D6;&#x6216;&#x521B;&#x5EFA;Mybatis SQLSession</li>
 </ul>
-<p>DefaultSqlSession selectList<br><img src="/images/java/mybatis/defaultSqlSession_selectList.png" alt="defaultSqlSession_selectList"></p>
+<p>DefaultSqlSession selectList<br><img src="/2016/04/27/mybatis-and-spring-integrate-analyze/defaultSqlSession_selectList.png" alt="defaultSqlSession_selectList"></p>
 <ul>
-<li>根据不同的执行类型创建执行器，eg：Batch、Simple以及Reuse执行器</li>
-<li>创建RoutingStatementHander语句处理器</li>
-<li>创建DefaultParameterHandler设置执行的sql参数</li>
-<li>创建DefaultResultSetHandler处理JDBC查询的结果集</li>
+<li>&#x6839;&#x636E;&#x4E0D;&#x540C;&#x7684;&#x6267;&#x884C;&#x7C7B;&#x578B;&#x521B;&#x5EFA;&#x6267;&#x884C;&#x5668;&#xFF0C;eg&#xFF1A;Batch&#x3001;Simple&#x4EE5;&#x53CA;Reuse&#x6267;&#x884C;&#x5668;</li>
+<li>&#x521B;&#x5EFA;RoutingStatementHander&#x8BED;&#x53E5;&#x5904;&#x7406;&#x5668;</li>
+<li>&#x521B;&#x5EFA;DefaultParameterHandler&#x8BBE;&#x7F6E;&#x6267;&#x884C;&#x7684;sql&#x53C2;&#x6570;</li>
+<li>&#x521B;&#x5EFA;DefaultResultSetHandler&#x5904;&#x7406;JDBC&#x67E5;&#x8BE2;&#x7684;&#x7ED3;&#x679C;&#x96C6;</li>
 </ul>
 
       
