@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://qiufanghua.github.io/"/>
-  <updated>2016-05-03T01:16:53.000Z</updated>
+  <updated>2017-01-06T14:53:08.000Z</updated>
   <id>https://qiufanghua.github.io/</id>
   
   <author>
@@ -16,14 +16,300 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>RocketMQ-简介</title>
+    <link href="https://qiufanghua.github.io/2017/01/06/RocketMQ-%E7%AE%80%E4%BB%8B/"/>
+    <id>https://qiufanghua.github.io/2017/01/06/RocketMQ-简介/</id>
+    <published>2017-01-06T09:23:00.000Z</published>
+    <updated>2017-01-06T14:53:08.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;RocketMQ&quot;&gt;&lt;a href=&quot;#RocketMQ&quot; class=&quot;headerlink&quot; title=&quot;RocketMQ&quot;&gt;&lt;/a&gt;RocketMQ&lt;/h2&gt;&lt;h3 id=&quot;前世今生&quot;&gt;&lt;a href=&quot;#前世今生&quot; class=&quot;headerlink&quot; title=&quot;前世今生&quot;&gt;&lt;/a&gt;前世今生&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;RocketMQ&lt;/strong&gt; 阿里开源的又一大作，定义为分布式消息中间件，高可用（无单点：Namesrv部部署多个，节点为对等节点互相备份，Broker主备部署），高吞吐量，高抗消息积压（亿级消息堆积能力），低延时，可伸缩性，前世是MetaQ2.x，其核心思（topic，队列，消息存储，消息消费方式…）借助与Kafka（LinkedIn公司scala语言开发的一种高吞吐量的分布式发布订阅消息系统，现是Apache顶级项目），已开源的稳定版本为3.5.8，现已是Apache的一个孵化项目，版本是4.0.0。我后续的学习都是此版本。&lt;/p&gt;
+&lt;h3 id=&quot;RocketMQ整体介绍&quot;&gt;&lt;a href=&quot;#RocketMQ整体介绍&quot; class=&quot;headerlink&quot; title=&quot;RocketMQ整体介绍&quot;&gt;&lt;/a&gt;RocketMQ整体介绍&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;../images/java/rocketmq/rocketmq_design.png&quot; alt=&quot;队列模型消息系统&quot; title=&quot;队列模型消息系统&quot;&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Producer、Conusmer，Queue都可以分布式&lt;/li&gt;
+&lt;li&gt;Producer与Topic一一对应，Topic对应n个队列，队列又与Broker对应；Producer向Topic中的队列轮流发送消息，Consumer如果是广播消费类型，则Consumer实例（同样可以部署多个）消费这个Topic对应的所有队列，如果是集群消费，则多个Consumer实例平均消费这个Topic对应的队列&lt;/li&gt;
+&lt;li&gt;Consumer通过pull方式消费消息，虽然也提供消息监听，底层实现也是通过轮询pull消息来实现&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;RocketMQ核心模块介绍&quot;&gt;&lt;a href=&quot;#RocketMQ核心模块介绍&quot; class=&quot;headerlink&quot; title=&quot;RocketMQ核心模块介绍&quot;&gt;&lt;/a&gt;RocketMQ核心模块介绍&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;../images/java/rocketmq/rokcetmq_core_component.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h4 id=&quot;RocketMQ-Name-servers&quot;&gt;&lt;a href=&quot;#RocketMQ-Name-servers&quot; class=&quot;headerlink&quot; title=&quot;RocketMQ Name servers&quot;&gt;&lt;/a&gt;RocketMQ Name servers&lt;/h4&gt;&lt;h4 id=&quot;RocketMQ-Brokers&quot;&gt;&lt;a href=&quot;#RocketMQ-Brokers&quot; class=&quot;headerlink&quot; title=&quot;RocketMQ Brokers&quot;&gt;&lt;/a&gt;RocketMQ Brokers&lt;/h4&gt;&lt;h3 id=&quot;Broker存储&quot;&gt;&lt;a href=&quot;#Broker存储&quot; class=&quot;headerlink&quot; title=&quot;Broker存储&quot;&gt;&lt;/a&gt;Broker存储&lt;/h3&gt;&lt;h3 id=&quot;关键特性&quot;&gt;&lt;a href=&quot;#关键特性&quot; class=&quot;headerlink&quot; title=&quot;关键特性&quot;&gt;&lt;/a&gt;关键特性&lt;/h3&gt;&lt;h3 id=&quot;RocketMQ部署结构&quot;&gt;&lt;a href=&quot;#RocketMQ部署结构&quot; class=&quot;headerlink&quot; title=&quot;RocketMQ部署结构&quot;&gt;&lt;/a&gt;RocketMQ部署结构&lt;/h3&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;RocketMQ&quot;&gt;&lt;a href=&quot;#RocketMQ&quot; class=&quot;headerlink&quot; title=&quot;RocketMQ&quot;&gt;&lt;/a&gt;RocketMQ&lt;/h2&gt;&lt;h3 id=&quot;前世今生&quot;&gt;&lt;a href=&quot;#前世今生&quot; class=&quot;headerlink&quot; 
+    
+    </summary>
+    
+      <category term="Java" scheme="https://qiufanghua.github.io/categories/Java/"/>
+    
+      <category term="RocketMQ" scheme="https://qiufanghua.github.io/categories/Java/RocketMQ/"/>
+    
+    
+      <category term="RocketMQ" scheme="https://qiufanghua.github.io/tags/RocketMQ/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RocketMQ-模块分析－store</title>
+    <link href="https://qiufanghua.github.io/2017/01/06/RocketMQ-%E6%A8%A1%E5%9D%97%E5%88%86%E6%9E%90-store/"/>
+    <id>https://qiufanghua.github.io/2017/01/06/RocketMQ-模块分析-store/</id>
+    <published>2017-01-06T07:37:20.000Z</published>
+    <updated>2017-01-06T14:55:47.000Z</updated>
+    
+    <content type="html"></content>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="Java" scheme="https://qiufanghua.github.io/categories/Java/"/>
+    
+      <category term="RocketMQ" scheme="https://qiufanghua.github.io/categories/Java/RocketMQ/"/>
+    
+    
+      <category term="RocketMQ" scheme="https://qiufanghua.github.io/tags/RocketMQ/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RocketMQ-模块分析－filtersrv</title>
+    <link href="https://qiufanghua.github.io/2017/01/06/RocketMQ-%E6%A8%A1%E5%9D%97%E5%88%86%E6%9E%90-filtersrv/"/>
+    <id>https://qiufanghua.github.io/2017/01/06/RocketMQ-模块分析-filtersrv/</id>
+    <published>2017-01-06T07:37:07.000Z</published>
+    <updated>2017-01-06T14:54:37.000Z</updated>
+    
+    <content type="html"></content>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="Java" scheme="https://qiufanghua.github.io/categories/Java/"/>
+    
+      <category term="RocketMQ" scheme="https://qiufanghua.github.io/categories/Java/RocketMQ/"/>
+    
+    
+      <category term="RocketMQ" scheme="https://qiufanghua.github.io/tags/RocketMQ/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RocketMQ-模块分析－broker</title>
+    <link href="https://qiufanghua.github.io/2017/01/06/RocketMQ-%E6%A8%A1%E5%9D%97%E5%88%86%E6%9E%90-broker/"/>
+    <id>https://qiufanghua.github.io/2017/01/06/RocketMQ-模块分析-broker/</id>
+    <published>2017-01-06T07:36:48.000Z</published>
+    <updated>2017-01-06T14:53:59.000Z</updated>
+    
+    <content type="html"></content>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="Java" scheme="https://qiufanghua.github.io/categories/Java/"/>
+    
+      <category term="RocketMQ" scheme="https://qiufanghua.github.io/categories/Java/RocketMQ/"/>
+    
+    
+      <category term="RocketMQ" scheme="https://qiufanghua.github.io/tags/RocketMQ/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RocketMQ-模块分析－namesrv</title>
+    <link href="https://qiufanghua.github.io/2017/01/06/RocketMQ-%E6%A8%A1%E5%9D%97%E5%88%86%E6%9E%90-namesrv/"/>
+    <id>https://qiufanghua.github.io/2017/01/06/RocketMQ-模块分析-namesrv/</id>
+    <published>2017-01-06T07:36:16.000Z</published>
+    <updated>2017-01-06T14:55:08.000Z</updated>
+    
+    <content type="html"></content>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="Java" scheme="https://qiufanghua.github.io/categories/Java/"/>
+    
+      <category term="RocketMQ" scheme="https://qiufanghua.github.io/categories/Java/RocketMQ/"/>
+    
+    
+      <category term="RocketMQ" scheme="https://qiufanghua.github.io/tags/RocketMQ/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RocketMQ-原理分析</title>
+    <link href="https://qiufanghua.github.io/2017/01/06/RocketMQ-%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/"/>
+    <id>https://qiufanghua.github.io/2017/01/06/RocketMQ-原理解析/</id>
+    <published>2017-01-06T07:35:22.000Z</published>
+    <updated>2017-01-06T14:55:41.000Z</updated>
+    
+    <content type="html"></content>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="Java" scheme="https://qiufanghua.github.io/categories/Java/"/>
+    
+      <category term="RocketMQ" scheme="https://qiufanghua.github.io/categories/Java/RocketMQ/"/>
+    
+    
+      <category term="RocketMQ" scheme="https://qiufanghua.github.io/tags/RocketMQ/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>zk quorum peer start</title>
+    <link href="https://qiufanghua.github.io/2016/05/14/zk-quorum-peer-start/"/>
+    <id>https://qiufanghua.github.io/2016/05/14/zk-quorum-peer-start/</id>
+    <published>2016-05-14T03:12:03.000Z</published>
+    <updated>2016-05-14T15:20:24.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;QuorumPeerMain&quot;&gt;&lt;a href=&quot;#QuorumPeerMain&quot; class=&quot;headerlink&quot; title=&quot;QuorumPeerMain&quot;&gt;&lt;/a&gt;QuorumPeerMain&lt;/h1&gt;&lt;p&gt;Zookeeper集成启动类，&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;main方法启动&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;initializeAndRun&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String[] args)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;throws&lt;/span&gt; ConfigException, IOException, AdminServerException&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        QuorumPeerConfig config = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; QuorumPeerConfig();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (args.length == &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            config.parse(args[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;]);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;// Start and schedule the the purge task&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        DatadirCleanupManager purgeMgr = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; DatadirCleanupManager(config&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                .getDataDir(), config.getDataLogDir(), config&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                .getSnapRetainCount(), config.getPurgeInterval());&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        purgeMgr.start();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (args.length == &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;amp;&amp;amp; config.isDistributed()) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            runFromConfig(config);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125; &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            LOG.warn(&lt;span class=&quot;string&quot;&gt;&quot;Either no config or no quorum defined in config, running &quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    + &lt;span class=&quot;string&quot;&gt;&quot; in standalone mode&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;comment&quot;&gt;// there is only server in the quorum -- run as standalone&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            ZooKeeperServerMain.main(args);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;QuorumPeerConfig解析Zookeeper配置文件&lt;br&gt;zooSample.cfg&lt;br&gt; tickTime=2000&lt;br&gt; dataDir=/zookeeper/data/zookeeper1&lt;br&gt; initLimit=5&lt;br&gt; syncLimit=2&lt;br&gt; dynamicConfigFile=/zookeeper/conf/zoo_replicated1.cfg.dynamic&lt;br&gt;主要属性&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; InetSocketAddress clientPortAddress;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; InetSocketAddress secureClientPortAddress;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// ZK 数据存储目录&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; File dataDir;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// ZK节点编辑日志存储目录&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; File dataLogDir;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; String dynamicConfigFileStr = &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; String configFileStr = &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; tickTime = ZooKeeperServer.DEFAULT_TICK_TIME;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; maxClientCnxns = &lt;span class=&quot;number&quot;&gt;60&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;comment&quot;&gt;/** defaults to -1 if not set explicitly */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; minSessionTimeout = -&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;comment&quot;&gt;/** defaults to -1 if not set explicitly */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; maxSessionTimeout = -&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;boolean&lt;/span&gt; localSessionsEnabled = &lt;span class=&quot;keyword&quot;&gt;false&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;boolean&lt;/span&gt; localSessionsUpgradingEnabled = &lt;span class=&quot;keyword&quot;&gt;false&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//链接？&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; initLimit;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; syncLimit;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; electionAlg = &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; electionPort = &lt;span class=&quot;number&quot;&gt;2182&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;boolean&lt;/span&gt; quorumListenOnAllIPs = &lt;span class=&quot;keyword&quot;&gt;false&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// 当前节点的ServerId，myIdFile＝new File(dataDir, &quot;myid&quot;);&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;long&lt;/span&gt; serverId = UNSET_SERVERID;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// Quorum验证；暂存配置的QuorumServer&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; QuorumVerifier quorumVerifier = &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;, lastSeenQuorumVerifier = &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; snapRetainCount = &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; purgeInterval = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;boolean&lt;/span&gt; syncEnabled = &lt;span class=&quot;keyword&quot;&gt;true&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;comment&quot;&gt;//节点类型&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; LearnerType peerType = LearnerType.PARTICIPANT;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;解析dynamicConfigFileStr，创建QuorumVerifier&lt;br&gt;dynamicConfigFile&lt;br&gt; server.&lt;positive id=&quot;&quot;&gt; = &lt;address1&gt;:&lt;port1&gt;:&lt;port2&gt;[:role];[&lt;client port=&quot;&quot; address=&quot;&quot;&gt;:]&lt;client port=&quot;&quot;&gt;&lt;br&gt; server.1=125.23.63.23: 2780: 2783: participant;2791&lt;br&gt; server.2=125.23.63.24: 2781: 2784: participant;2792&lt;br&gt; server.3=125.23.63.25: 2782: 2785: participant;2793&lt;br&gt; group.1=1: 2: 3&lt;br&gt; group.2=4: 5: 6&lt;br&gt; group.3=7: 8: 9&lt;br&gt; weight.1=1&lt;br&gt; weight.2=1&lt;br&gt; weight.3=1&lt;br&gt; weight.4=1&lt;br&gt; weight.5=1&lt;br&gt; weight.6=1&lt;br&gt; weight.7=1&lt;br&gt; weight.8=1&lt;br&gt; weight.9=1&lt;/client&gt;&lt;/client&gt;&lt;/port2&gt;&lt;/port1&gt;&lt;/address1&gt;&lt;/positive&gt;&lt;/p&gt;
+ &lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; HashMap&amp;lt;Long, Long&amp;gt; serverWeight = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; HashMap&amp;lt;Long, Long&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; HashMap&amp;lt;Long, Long&amp;gt; serverGroup = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; HashMap&amp;lt;Long, Long&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; HashMap&amp;lt;Long, Long&amp;gt; groupWeight = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; HashMap&amp;lt;Long, Long&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; numGroups = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; Map&amp;lt;Long, QuorumServer&amp;gt; allMembers = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; HashMap&amp;lt;Long, QuorumServer&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; Map&amp;lt;Long, QuorumServer&amp;gt; participatingMembers = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; HashMap&amp;lt;Long, QuorumServer&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; Map&amp;lt;Long, QuorumServer&amp;gt; observingMembers = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; HashMap&amp;lt;Long, QuorumServer&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;QuorumPeerMain&quot;&gt;&lt;a href=&quot;#QuorumPeerMain&quot; class=&quot;headerlink&quot; title=&quot;QuorumPeerMain&quot;&gt;&lt;/a&gt;QuorumPeerMain&lt;/h1&gt;&lt;p&gt;Zookeeper集成启动类，&lt;/p&gt;
+&lt;o
+    
+    </summary>
+    
+      <category term="Java" scheme="https://qiufanghua.github.io/categories/Java/"/>
+    
+      <category term="Zookeeper" scheme="https://qiufanghua.github.io/categories/Java/Zookeeper/"/>
+    
+    
+      <category term="Zookeeper" scheme="https://qiufanghua.github.io/tags/Zookeeper/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>zk－quorum-manager</title>
+    <link href="https://qiufanghua.github.io/2016/05/14/zk-quorum-manager/"/>
+    <id>https://qiufanghua.github.io/2016/05/14/zk-quorum-manager/</id>
+    <published>2016-05-14T03:06:14.000Z</published>
+    <updated>2017-01-06T14:56:44.000Z</updated>
+    
+    <content type="html"></content>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="Java" scheme="https://qiufanghua.github.io/categories/Java/"/>
+    
+      <category term="Zookeeper" scheme="https://qiufanghua.github.io/categories/Java/Zookeeper/"/>
+    
+    
+      <category term="Zookeeper" scheme="https://qiufanghua.github.io/tags/Zookeeper/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Datanode Manager</title>
+    <link href="https://qiufanghua.github.io/2016/05/08/Datanode-Manager/"/>
+    <id>https://qiufanghua.github.io/2016/05/08/Datanode-Manager/</id>
+    <published>2016-05-08T02:08:55.000Z</published>
+    <updated>2016-05-08T02:08:55.000Z</updated>
+    
+    <content type="html"></content>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Block Manager</title>
+    <link href="https://qiufanghua.github.io/2016/05/08/Block-Manager/"/>
+    <id>https://qiufanghua.github.io/2016/05/08/Block-Manager/</id>
+    <published>2016-05-08T02:02:36.000Z</published>
+    <updated>2016-05-08T02:27:35.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;Block-Manager&quot;&gt;&lt;a href=&quot;#Block-Manager&quot; class=&quot;headerlink&quot; title=&quot;Block Manager&quot;&gt;&lt;/a&gt;Block Manager&lt;/h1&gt;&lt;p&gt;保存集成中数据块信息&lt;/p&gt;
+&lt;h2 id=&quot;主要依赖&quot;&gt;&lt;a href=&quot;#主要依赖&quot; class=&quot;headerlink&quot; title=&quot;主要依赖&quot;&gt;&lt;/a&gt;主要依赖&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;../images/java/hadoop/block_manager_class.png&quot; alt=&quot;Block Manager&quot; title=&quot;Block Manager&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Block-Manager&quot;&gt;&lt;a href=&quot;#Block-Manager&quot; class=&quot;headerlink&quot; title=&quot;Block Manager&quot;&gt;&lt;/a&gt;Block Manager&lt;/h1&gt;&lt;p&gt;保存集成中数据块信息&lt;/p&gt;
+&lt;h2 id=&quot;主要依
+    
+    </summary>
+    
+      <category term="Java" scheme="https://qiufanghua.github.io/categories/Java/"/>
+    
+      <category term="Hadoop" scheme="https://qiufanghua.github.io/categories/Java/Hadoop/"/>
+    
+    
+      <category term="Hadoop" scheme="https://qiufanghua.github.io/tags/Hadoop/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hadoop name node start</title>
+    <link href="https://qiufanghua.github.io/2016/05/07/hadoop-name-node-start/"/>
+    <id>https://qiufanghua.github.io/2016/05/07/hadoop-name-node-start/</id>
+    <published>2016-05-07T10:02:14.000Z</published>
+    <updated>2016-05-08T02:03:45.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;Hadoop-Namenode-Server-Start&quot;&gt;&lt;a href=&quot;#Hadoop-Namenode-Server-Start&quot; class=&quot;headerlink&quot; title=&quot;Hadoop Namenode Server Start&quot;&gt;&lt;/a&gt;Hadoop Namenode Server Start&lt;/h1&gt;&lt;p&gt;Namenode 命名节点主要管理目录命名空间，以及数据块信息管理；同时维护者文件名到块序列关系(namespace)，这块信息会存到磁盘；已保存数据块与数据节点到对应关系，此信息会在namenode 启动时重建。Namenode实现ClientProtocol接口，提供客户端操作DFS services；也实现DataNodeProtocol接口，提供DataNode通讯的接口；实现NamenodeProtocol，提供Secondary namenodes通讯的接口。&lt;br&gt;我们从main方法开始分析：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;main启动&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String argv[])&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;throws&lt;/span&gt; Exception &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;// help提示&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (DFSUtil.parseHelpArgument(argv, NameNode.USAGE, System.out, &lt;span class=&quot;keyword&quot;&gt;true&lt;/span&gt;)) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      System.exit(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;try&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      StringUtils.startupShutdownMessage(NameNode.class, argv, LOG);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	  &lt;span class=&quot;comment&quot;&gt;// 创建NameNode&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      NameNode namenode = createNameNode(argv, &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	  &lt;span class=&quot;comment&quot;&gt;// 等待NameNode线程结束&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (namenode != &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        namenode.join();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125; &lt;span class=&quot;keyword&quot;&gt;catch&lt;/span&gt; (Throwable e) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      LOG.error(&lt;span class=&quot;string&quot;&gt;&quot;Failed to start namenode.&quot;&lt;/span&gt;, e);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      terminate(&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, e);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;new NameNode&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;40&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;NameNode&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(Configuration conf, NamenodeRole role)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;throws&lt;/span&gt; IOException &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;super&lt;/span&gt;(conf);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.tracer = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Tracer.Builder(&lt;span class=&quot;string&quot;&gt;&quot;NameNode&quot;&lt;/span&gt;).&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        conf(TraceUtils.wrapHadoopConf(NAMENODE_HTRACE_PREFIX, conf)).&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        build();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.tracerConfigurationManager =&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; TracerConfigurationManager(NAMENODE_HTRACE_PREFIX, conf);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.role = role;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    setClientNamenodeAddress(conf);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;comment&quot;&gt;// 获取命名服务ID，联邦服务(扩展NameNode管理文件对应块信息的能力，后续再做这块地分析)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    String nsId = getNameServiceId(conf);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    String namenodeId = HAUtil.getNameNodeId(conf, nsId);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;comment&quot;&gt;// 高可用是否配置&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.haEnabled = HAUtil.isHAEnabled(conf, nsId);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;comment&quot;&gt;// 根据启动项决定是Master与StandBy&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    state = createHAState(getStartupOption(conf));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.allowStaleStandbyReads = HAUtil.shouldAllowStandbyReads(conf);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;comment&quot;&gt;// 创建NameNodeHaContext&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.haContext = createHAContext();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;try&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      initializeGenericKeys(conf, nsId, namenodeId);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	  &lt;span class=&quot;comment&quot;&gt;// 初始化NameNode&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      initialize(getConf());&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;try&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        haContext.writeLock();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        state.prepareToEnterState(haContext);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        state.enterState(haContext);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125; &lt;span class=&quot;keyword&quot;&gt;finally&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        haContext.writeUnlock();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125; &lt;span class=&quot;keyword&quot;&gt;catch&lt;/span&gt; (IOException e) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.stopAtException(e);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;throw&lt;/span&gt; e;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125; &lt;span class=&quot;keyword&quot;&gt;catch&lt;/span&gt; (HadoopIllegalArgumentException e) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.stopAtException(e);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;throw&lt;/span&gt; e;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.started.set(&lt;span class=&quot;keyword&quot;&gt;true&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;创建NameNodeHAContext过程，其实就是保存状态与选择行的暴露一些接口&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;初始化NameNode&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;40&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;41&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;42&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;43&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;44&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;45&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;46&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;47&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;initialize&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(Configuration conf)&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;throws&lt;/span&gt; IOException &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (conf.get(HADOOP_USER_GROUP_METRICS_PERCENTILES_INTERVALS) == &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      String intervals = conf.get(DFS_METRICS_PERCENTILES_INTERVALS_KEY);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (intervals != &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        conf.set(HADOOP_USER_GROUP_METRICS_PERCENTILES_INTERVALS,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          intervals);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    UserGroupInformation.setConfiguration(conf);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    loginAsNameNodeUser(conf);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    NameNode.initMetrics(conf, &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.getRole());&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    StartupProgressMetrics.register(startupProgress);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    pauseMonitor = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; JvmPauseMonitor();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    pauseMonitor.init(conf);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    pauseMonitor.start();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    metrics.getJvmMetrics().setPauseMonitor(pauseMonitor);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (NamenodeRole.NAMENODE == role) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;comment&quot;&gt;// 启动NameNodeHttpServer，此过程另做分析&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      startHttpServer(conf);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;comment&quot;&gt;// 加载文件系统&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    loadNamesystem(conf);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    rpcServer = createRpcServer(conf);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    initReconfigurableBackoffKey();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (clientNamenodeAddress == &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;comment&quot;&gt;// This is expected for MiniDFSCluster. Set it now using &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;comment&quot;&gt;// the RPC server&#39;s bind address.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      clientNamenodeAddress = &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          NetUtils.getHostPortString(rpcServer.getRpcAddress());&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      LOG.info(&lt;span class=&quot;string&quot;&gt;&quot;Clients are to use &quot;&lt;/span&gt; + clientNamenodeAddress + &lt;span class=&quot;string&quot;&gt;&quot; to access&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          + &lt;span class=&quot;string&quot;&gt;&quot; this namenode/service.&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (NamenodeRole.NAMENODE == role) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      httpServer.setNameNodeAddress(getNameNodeAddress());&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      httpServer.setFSImage(getFSImage());&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    startCommonServices(conf);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    startMetricsLogger(conf);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;读取文件，加载Image与Edit文件，创建FsNamesystem&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;创建BlockManager&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Hadoop-Namenode-Server-Start&quot;&gt;&lt;a href=&quot;#Hadoop-Namenode-Server-Start&quot; class=&quot;headerlink&quot; title=&quot;Hadoop Namenode Server Start&quot;&gt;&lt;/a&gt;Ha
+    
+    </summary>
+    
+      <category term="Java" scheme="https://qiufanghua.github.io/categories/Java/"/>
+    
+      <category term="Hadoop" scheme="https://qiufanghua.github.io/categories/Java/Hadoop/"/>
+    
+    
+      <category term="Hadoop" scheme="https://qiufanghua.github.io/tags/Hadoop/"/>
+    
+  </entry>
+  
+  <entry>
     <title>dubbo service gray deploy</title>
     <link href="https://qiufanghua.github.io/2016/05/02/dubbo-service-gray-deploy/"/>
     <id>https://qiufanghua.github.io/2016/05/02/dubbo-service-gray-deploy/</id>
     <published>2016-05-02T13:30:06.000Z</published>
-    <updated>2016-05-03T01:16:53.000Z</updated>
+    <updated>2016-05-13T07:56:10.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h1&gt;&lt;p&gt;我们现在的灰度是基于系统级别，是在FCP系统上对所以过来的请求进行拦截，通过请求参数，客服端IP来决定是否能够访问被访问的系统。这控制粒度太大了，没法做到系统的灰度更新以及服务的灰度发布。例如，系统A在机器s1与s2上部署的是v1的版本，在s3与s4上部署的是更新了服务的v2的版本，如果需要企业A只能访问v2的版本，企业B只能访问v1的版本，这种情况现有的灰度系统是无法实现，因此需要我们的灰度系统能够提供基于应用、基于部署到机器、基于服务级别的灰度控制。&lt;/p&gt;
-&lt;h1 id=&quot;系统结构&quot;&gt;&lt;a href=&quot;#系统结构&quot; class=&quot;headerlink&quot; title=&quot;系统结构&quot;&gt;&lt;/a&gt;系统结构&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;/images/java/dubbo/gray_servcie_architect.png&quot; alt=&quot;gray architect&quot; title=&quot;gray architect &quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;系统结构&quot;&gt;&lt;a href=&quot;#系统结构&quot; class=&quot;headerlink&quot; title=&quot;系统结构&quot;&gt;&lt;/a&gt;系统结构&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;../images/java/dubbo/gray_servcie_architect.png&quot; alt=&quot;gray architect&quot; title=&quot;gray architect &quot;&gt;&lt;/p&gt;
 &lt;h1 id=&quot;系统模块&quot;&gt;&lt;a href=&quot;#系统模块&quot; class=&quot;headerlink&quot; title=&quot;系统模块&quot;&gt;&lt;/a&gt;系统模块&lt;/h1&gt;&lt;h2 id=&quot;灰度客户端&quot;&gt;&lt;a href=&quot;#灰度客户端&quot; class=&quot;headerlink&quot; title=&quot;灰度客户端&quot;&gt;&lt;/a&gt;灰度客户端&lt;/h2&gt;&lt;p&gt;起初我们想通过扩展Dubbo的服务路由器，添加基于请求参数的路由器，这样在Dubbo服务调用时加入我们的灰度逻辑，过滤不符合条件的远程服务，达到服务地灰度发布。但是这种实现是基于Dubbo服务来配置路由规则，如果我们需要提供基于应用级别的灰度，我们需要为该应用暴露所有服务都添加路由规则，以便我们Dubbo服务引用者能够接收到对应服务的路由规则。这有两个弊端，一是，频繁的设置Dubbo服务影响性能；二是：服务路由配置信息会推送到所有的客服端，即使他没有添加灰度控制，这有些不合理。&lt;br&gt;因此我们采用如下方案：&lt;br&gt;引用Dubbo服务时，Dubbo返回Invoker对象引用远程服务，在请求服务时会根据我们Invocation(服务请求信息)调用Invoker关联的Directory的服务查找方法，通过代理Directory的服务查找方法，添加我们的灰度逻辑。&lt;/p&gt;
 &lt;h3 id=&quot;Dubbo服务查找拦截&quot;&gt;&lt;a href=&quot;#Dubbo服务查找拦截&quot; class=&quot;headerlink&quot; title=&quot;Dubbo服务查找拦截&quot;&gt;&lt;/a&gt;Dubbo服务查找拦截&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;添加Cluster Wrapper类。添加此类提供代理Directory的入口。&lt;/li&gt;
