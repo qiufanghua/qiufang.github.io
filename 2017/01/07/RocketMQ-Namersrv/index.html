@@ -1,0 +1,960 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="RocketMQ," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Jone Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="NameServerNamesrv&amp;#xFF0C;&amp;#x540D;&amp;#x79F0;&amp;#x670D;&amp;#x52A1;&amp;#xFF0C;&amp;#x65E0;&amp;#x72B6;&amp;#x6001;&amp;#xFF0C;&amp;#x65E0;&amp;#x5355;&amp;#x70B9;&amp;#xFF0C;&amp;#x53EF;&amp;#x6A2A;&amp;#x5411;&amp;#x6269;&amp;#x5C55;&amp;#xFF0C;&amp;#x53EF;&amp;#x90E8;&amp;#x7F72">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RocketMQ-Namersrv">
+<meta property="og:url" content="https://qiufanghua.github.io/2017/01/07/RocketMQ-Namersrv/index.html">
+<meta property="og:site_name" content="Jone Blog">
+<meta property="og:description" content="NameServerNamesrv&amp;#xFF0C;&amp;#x540D;&amp;#x79F0;&amp;#x670D;&amp;#x52A1;&amp;#xFF0C;&amp;#x65E0;&amp;#x72B6;&amp;#x6001;&amp;#xFF0C;&amp;#x65E0;&amp;#x5355;&amp;#x70B9;&amp;#xFF0C;&amp;#x53EF;&amp;#x6A2A;&amp;#x5411;&amp;#x6269;&amp;#x5C55;&amp;#xFF0C;&amp;#x53EF;&amp;#x90E8;&amp;#x7F72">
+<meta property="og:image" content="https://qiufanghua.github.io/2017/01/07/RocketMQ-Namersrv/Namesrv-start.png">
+<meta property="og:updated_time" content="2017-01-08T04:36:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RocketMQ-Namersrv">
+<meta name="twitter:description" content="NameServerNamesrv&amp;#xFF0C;&amp;#x540D;&amp;#x79F0;&amp;#x670D;&amp;#x52A1;&amp;#xFF0C;&amp;#x65E0;&amp;#x72B6;&amp;#x6001;&amp;#xFF0C;&amp;#x65E0;&amp;#x5355;&amp;#x70B9;&amp;#xFF0C;&amp;#x53EF;&amp;#x6A2A;&amp;#x5411;&amp;#x6269;&amp;#x5C55;&amp;#xFF0C;&amp;#x53EF;&amp;#x90E8;&amp;#x7F72">
+<meta name="twitter:image" content="https://qiufanghua.github.io/2017/01/07/RocketMQ-Namersrv/Namesrv-start.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Jone'
+    }
+  };
+</script>
+
+  <title> RocketMQ-Namersrv | Jone Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?96bf0325d32d941896df903cc57e0c9a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Jone Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'y2CrS3hewGYjGes8o1yR','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                RocketMQ-Namersrv
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-07T08:17:19+08:00" content="2017-01-07">
+              2017-01-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/RocketMQ/" itemprop="url" rel="index">
+                    <span itemprop="name">RocketMQ</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/07/RocketMQ-Namersrv/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/07/RocketMQ-Namersrv/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/01/07/RocketMQ-Namersrv/" class="leancloud_visitors" data-flag-title="RocketMQ-Namersrv">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="NameServer"><a href="#NameServer" class="headerlink" title="NameServer"></a>NameServer</h2><p>Namesrv&#xFF0C;&#x540D;&#x79F0;&#x670D;&#x52A1;&#xFF0C;&#x65E0;&#x72B6;&#x6001;&#xFF0C;&#x65E0;&#x5355;&#x70B9;&#xFF0C;&#x53EF;&#x6A2A;&#x5411;&#x6269;&#x5C55;&#xFF0C;&#x53EF;&#x90E8;&#x7F72;&#x591A;&#x4E2A;&#xFF0C;&#x4E00;&#x822C;&#x90E8;&#x7F72;3&#x53F0;&#xFF0C;&#x8282;&#x70B9;&#x4E4B;&#x95F4;&#x65E0;&#x4EFB;&#x4F55;&#x4FE1;&#x606F;&#x540C;&#x6B65;&#xFF0C;&#x4E3A;&#x5BF9;&#x7B49;&#x8282;&#x70B9;&#x3002;&#x4E3B;&#x8981;&#x6709;&#x4E24;&#x4E2A;&#x529F;&#x80FD;&#x3002;</p>
+<ol>
+<li>&#x63A5;&#x6536;Broker&#x8BF7;&#x6C42;&#xFF0C;&#x6CE8;&#x518C;Broker&#x8DEF;&#x7531;&#x4FE1;&#x606F;</li>
+<li>&#x63A5;&#x6536;Client&#xFF08;Producer&#xFF0C;Consumer&#xFF09;&#x8BF7;&#x6C42;&#xFF0C;&#x6839;&#x636E;Topic&#x83B7;&#x53D6;&#x5230;Brokers&#x7684;&#x8DEF;&#x7531;&#x4FE1;&#x606F;</li>
+</ol>
+<h2 id="NameServer&#x4E3B;&#x8981;&#x7C7B;&#x5206;&#x6790;"><a href="#NameServer&#x4E3B;&#x8981;&#x7C7B;&#x5206;&#x6790;" class="headerlink" title="NameServer&#x4E3B;&#x8981;&#x7C7B;&#x5206;&#x6790;"></a>NameServer&#x4E3B;&#x8981;&#x7C7B;&#x5206;&#x6790;</h2><h4 id="NamesrvStartup"><a href="#NamesrvStartup" class="headerlink" title="NamesrvStartup"></a>NamesrvStartup</h4><p>Namesrv&#x542F;&#x52A8;&#x7C7B;&#xFF0C;&#x8BFB;&#x53D6;&#x914D;&#x7F6E;&#x751F;&#x6210;NamesrvConfig&#x3001;NettyServerConfig&#xFF08;&#x9ED8;&#x8BA4;&#x76D1;&#x542C;&#x7AEF;&#x53E3;&#x53F7;9876&#xFF09;&#x3001;&#x6839;&#x636E;&#x914D;&#x7F6E;&#x4FE1;&#x606F;&#x521B;&#x5EFA;NamesrvController&#x5E76;&#x542F;&#x52A8;controller&#x3002;</p>
+<h4 id="NamesrvController"><a href="#NamesrvController" class="headerlink" title="NamesrvController"></a>NamesrvController</h4><p>&#x6709;&#x70B9;&#x7C7B;&#x4F3C;&#x4E8E;&#x6211;&#x4EEC;MVC&#x4E2D;&#x5E95;Controller&#xFF0C;&#x6240;&#x6709;&#x7684;&#x4F9D;&#x8D56;&#x90FD;&#x662F;&#x901A;&#x8FC7;&#x4ED6;&#x6765;&#x83B7;&#x53D6;&#xFF0C;NameServer&#x4E2D;&#x5176;&#x4ED6;&#x7684;&#x7EC4;&#x4EF6;&#x90FD;&#x662F;&#x901A;&#x8FC7;&#x4ED6;&#x6765;&#x83B7;&#x53D6;&#x8981;&#x8BBF;&#x95EE;&#x7684;&#x5176;&#x4ED6;&#x5BF9;&#x8C61;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">NamesvController{</span><br><span class="line">    Properties{</span><br><span class="line">        RouteInfoManager routeInfoManager</span><br><span class="line">        RemotingServer remotingServer</span><br><span class="line">        BrokerHousekeepingService brokerHousekeepingService</span><br><span class="line">    }</span><br><span class="line">    -&gt; initialize(){</span><br><span class="line">        -&gt; <span class="function">create <span class="title">NettyRemotingServer</span><span class="params">(brokerHousekeepingService)</span></span><br><span class="line">        -&gt; <span class="title">registerProcessor</span><span class="params">()</span></span>{</span><br><span class="line">            -&gt; remotingServer.registerDefaultProcessor(<span class="function">create <span class="title">DefaultRequestProcessor</span><span class="params">()</span>, remotingExecutor)</span><br><span class="line">            -&gt; scheduleAtFixRate routeInfoManager.scanNotActiveBroker</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    -&gt; <span class="title">start</span><span class="params">()</span></span>{</span><br><span class="line">        -&gt; remotingServer.start()</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<ol>
+<li>&#x6253;&#x5F00;NameServer&#xFF0C;&#x7ED1;&#x5B9A;&#x76D1;&#x542C;&#x7AEF;&#x53E3;&#xFF0C;&#x63A5;&#x53D7;Broker&#x4E0E;&#x5BA2;&#x670D;&#x7AEF;&#x670D;&#x52A1;</li>
+<li>&#x521B;&#x5EFA;RoteInfoManger&#x5B9E;&#x4F8B;&#xFF0C;&#x63A5;&#x53D7;Broker&#x6CE8;&#x518C;&#x4FE1;&#x606F;&#xFF0C;&#x6784;&#x5EFA;&#x8DEF;&#x7531;&#x4FE1;&#x606F;</li>
+</ol>
+<h4 id="RouteInfoManager"><a href="#RouteInfoManager" class="headerlink" title="RouteInfoManager"></a>RouteInfoManager</h4><p>&#x7EF4;&#x62A4;&#x6240;&#x6709;&#x7684;Broker&#x8DEF;&#x7531;&#x4FE1;&#x606F;&#x3001;&#x96C6;&#x6210;&#x4FE1;&#x606F;&#x3001;Topic&#x4FE1;&#x606F;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// &#x8FD0;&#x884C;&#x8FC7;&#x7A0B;&#x4E2D;&#x8DEF;&#x7531;&#x4FE1;&#x606F;&#xFF0C;&#x5185;&#x5B58;&#x6570;&#x636E;&#xFF0C;broker&#x5B9A;&#x671F;&#x63A8;&#x9001;&#x6570;&#x636E;</span></span><br><span class="line">RouteInfoManager{</span><br><span class="line">    ReadWriteLock lock</span><br><span class="line">    HashMap&lt;String<span class="comment">//topic,List&lt;QueueData&gt;&gt; topicQueueTable</span></span><br><span class="line">    HashMap&lt;String<span class="comment">//brokerName,BrokerData&gt; brokerAddrTable</span></span><br><span class="line">    HashMap&lt;String<span class="comment">//clusterName,Set&lt;String//brokerName&gt;&gt; culsterAddrTable</span></span><br><span class="line">    HashMap&lt;String<span class="comment">//brokerAddr,BrokerLiveInfo&gt; brokerLiveTable</span></span><br><span class="line">    HashMap&lt;String<span class="comment">//brokerAddr,List&lt;String&gt;//filter server&gt; filterServerTable</span></span><br><span class="line">    <span class="function">RegisterBrokerResult <span class="title">regsiterBroker</span><span class="params">()</span></span>{</span><br><span class="line">        -&gt; lock</span><br><span class="line">        -&gt; Set&lt;String&gt; brokerNames = clusterAddrTable.get(clusterName);brokerNames.add</span><br><span class="line">            <span class="comment">// &#x66F4;&#x65B0;&#x96C6;&#x6210;&#x4FE1;&#x606F;</span></span><br><span class="line">        -&gt; BrokerData brokerData = brokerAddrTable.get(brokerName)</span><br><span class="line">        -&gt; brokerData == <span class="keyword">null</span>{<span class="comment">//&#x66F4;&#x65B0;&#x4E3B;&#x5907;&#x4FE1;&#x606F;</span></span><br><span class="line">            -&gt; registerFirst = <span class="keyword">true</span>;</span><br><span class="line">            -&gt; brokerData = <span class="keyword">new</span> BrokerData()</span><br><span class="line">            -&gt; brokerData.setBrokerAddrs(HashMap&lt;Long<span class="comment">//brokerId,String//broker address&gt;)</span></span><br><span class="line">        }</span><br><span class="line">        String oldAddr = brokerData.getBrokerAddrs().put(brokerId,brokerAddr)</span><br><span class="line">        &#xFF0D;&gt; &#x66F4;&#x65B0;Topic&#x4FE1;&#x606F;</span><br><span class="line">        &#xFF0D;&gt; topicConfigWrapper != <span class="keyword">null</span> &amp;&amp; master_id == brokerId{</span><br><span class="line">            -&gt; isBrokerTopicConfigChanged(String brokerAddr, DataVersion dataVersion){</span><br><span class="line">                <span class="comment">// brokerLiveTable.get(brokerAddr) == null || !dataVersion</span></span><br><span class="line">                -&gt; ConcurrentHashMap&lt;String,TopicConfig&gt; tcTable=topicConfigWrapper.getTopicConfigTable()</span><br><span class="line">                -&gt; tcTable.forEach{</span><br><span class="line">                    -&gt; createAndUpdateQueueData(brokerName, TopicConfig){</span><br><span class="line">                        -&gt; QueueData queueData</span><br><span class="line">                        -&gt; queueData.setBrokerName(brokerName)</span><br><span class="line">                        -&gt; queueData.setWriteQueueNums,setReadQueueNums,setPerm,setTopicSynFlag</span><br><span class="line">                        -&gt; List&lt;QueueData&gt; queueDataList = topciQueueTable.get(topicName)</span><br><span class="line">                        -&gt; createOrUpdate queueDataList</span><br><span class="line">                    }</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        -&gt; brokerLiveTable.put(brokerAddr,<span class="keyword">new</span> BrokerLiveInfo())</span><br><span class="line">        -&gt; filterServerTable</span><br><span class="line">        -&gt; brokerId != master_id then setHaServerAddr, setMasterAddr</span><br><span class="line">    }</span><br><span class="line">    routeInfoManager().pickupTopicRouteData(topic){</span><br><span class="line">        -&gt; TopciRouteData create</span><br><span class="line">        -&gt; lock</span><br><span class="line">        -&gt; List&lt;QueueData&gt; queueDataList = topicQueueTable.get(topic),brokerAddrTable,filterServerTable</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line">QueueData{</span><br><span class="line">    String brokerName</span><br><span class="line">    <span class="keyword">int</span> readQueueNums</span><br><span class="line">    <span class="keyword">int</span> writeQueuNums</span><br><span class="line">    <span class="keyword">int</span> perm</span><br><span class="line">    <span class="keyword">int</span> topicSynFlag</span><br><span class="line">}</span><br><span class="line">BrokerData{</span><br><span class="line">    String brokerName</span><br><span class="line">    HashMap&lt;Long<span class="comment">//brokerId,String//broker address&gt; brokerAddrs</span></span><br><span class="line">}</span><br><span class="line">RouterInfoManager.BrokerLiveInfo{</span><br><span class="line">    <span class="keyword">long</span> lastUpdateTimestamp</span><br><span class="line">    DataVersion dataVersion</span><br><span class="line">    Channel channel</span><br><span class="line">    String haServerAddr</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h5 id="Broker&#x914D;&#x7F6E;&#x4FE1;&#x606F;"><a href="#Broker&#x914D;&#x7F6E;&#x4FE1;&#x606F;" class="headerlink" title="Broker&#x914D;&#x7F6E;&#x4FE1;&#x606F;"></a>Broker&#x914D;&#x7F6E;&#x4FE1;&#x606F;</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">brokerClusterName=DefaultCluster</span><br><span class="line">brokerName=broker-a</span><br><span class="line">brokerId=0</span><br><span class="line">deleteWhen=04</span><br><span class="line">fileReservedTime=48</span><br><span class="line">brokerRole=ASYNC_MASTER</span><br><span class="line">flushDiskType=ASYNC_FLUSH</span><br></pre></td></tr></table></figure>
+<h4 id="NettyRemotingServer-Client"><a href="#NettyRemotingServer-Client" class="headerlink" title="NettyRemotingServer/Client"></a>NettyRemotingServer/Client</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br></pre></td><td class="code"><pre><span class="line">NettyRemotingClient extends NettyRemotingAbstract{</span><br><span class="line">    <span class="keyword">long</span> LockTimeoutMills=<span class="number">3000</span></span><br><span class="line">    NettyClientConfig</span><br><span class="line">    Bootstrap</span><br><span class="line">    EventLoopGroup</span><br><span class="line">    DefaultEventExecutorGroup</span><br><span class="line">    Lock lockChannelTables</span><br><span class="line">    ConcurrentHashMap&lt;String<span class="comment">//addr, ChannelWrapper&gt; channelTables</span></span><br><span class="line">    Timer<span class="comment">// clientHuseKeepingService</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//name server</span></span><br><span class="line">    AtomicReference&lt;List&lt;String&gt;&gt; namesrvAddrList</span><br><span class="line">    AtomicReference&lt;String&gt; namesrvAddrChoosed</span><br><span class="line">    AtomicInteger namesrvIndex</span><br><span class="line">    Lock lockNamesrvChannel</span><br><span class="line">    <span class="comment">// &#x5904;&#x7406;callback response</span></span><br><span class="line">    ExecutorService publicExecutor</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">NettyRemotingServer extends NettyRemotingAbstract{</span><br><span class="line">    Properties{</span><br><span class="line">        ServerBootstrap serverBootstrap</span><br><span class="line">        EventLoopGroup eventLoopGroupSelector, eventLoopGroupBoss</span><br><span class="line">        DefaultEventExecutorGroup defaultEventExecutorGroup</span><br><span class="line">        ExecutorService publicExecutor</span><br><span class="line">        ChannelEventListener channelEventListener</span><br><span class="line">    }</span><br><span class="line">    NettyRemotingServer(){</span><br><span class="line">        -&gt; eventLoopGroupSelector = EpollEventLoopGroup() <span class="keyword">for</span> linux</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    start(){</span><br><span class="line">        -&gt; defaultEventExecutorGroup = DefaultEventExecutorGroup()</span><br><span class="line">        -&gt; ServerBootstrap childHandler.childHander(NettyConnectManagerHandler, NettyServerHandler)</span><br><span class="line">        -&gt; serverBootstrap.bind()</span><br><span class="line">        -&gt; <span class="function">scheduleAtFixedRate <span class="title">scanResponseTable</span><span class="params">()</span></span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    NettyConnectManageHandler</span>{</span><br><span class="line">        channelActive(ChannelHandlerContext ctx){</span><br><span class="line">            channelEventListener != <span class="keyword">null</span> {</span><br><span class="line">                nettyEventExecuter.putNettyEvent</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    NettyServerHandler&lt;RemotingCommand&gt;{</span><br><span class="line">        <span class="comment">// remoting command NettyDecoder decode</span></span><br><span class="line">        channelRead0(ChannelHandlerContext ctx, RemotingCommand msg){</span><br><span class="line">            -&gt; processMessageReceived(ctx, msg)</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">NettyRemotingAbstract{</span><br><span class="line">    Properties{</span><br><span class="line">        NettyEventExecuter nettyEventExecuter</span><br><span class="line">        Semaphore semaphoreOnewary, semaphoreAysnc</span><br><span class="line">        ConcurrentHashMap&lt;Integer<span class="comment">// opaque, ResposeFuture&gt; responseTable</span></span><br><span class="line">        Pair&lt;NettyRequestProcessor, ExecutorService&gt; defaultRequestProcessor</span><br><span class="line">        HashMap&lt;Integer<span class="comment">// request code,Pair&lt;NettyRequestProcesor,ExecutorService&gt;&gt; processorTable</span></span><br><span class="line">    }</span><br><span class="line">    NettyEventExecuer{</span><br><span class="line">        Proerties{</span><br><span class="line">            LinkedBlockingQueue&lt;NettyEvent&gt; eventQueue</span><br><span class="line">            <span class="keyword">int</span> maxSize = <span class="number">10000</span></span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    processMessageReceived(ChannelHandlerContext ctx, RemotingCommand msg){</span><br><span class="line">        -&gt; requestCmd procesRequestCommand</span><br><span class="line">        -&gt; responseCmd processResponseCommand</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    processRequestCommand(ChannelHandlerContext ctx, RemotingCommand msg) {</span><br><span class="line">        -&gt; Pair&lt;NettyRequestProcessor, ExecutorService&gt; pair = processorTable.get(cmd.getCode)</span><br><span class="line">        -&gt; RemotingCommand response = pair.getObject1().processRequest(ctx, cmd)</span><br><span class="line">        -&gt; !cmd.isOnewayRPC(){</span><br><span class="line">            -&gt; response.setOpaque(cmd.getOpaque);ctx.writeAndFlush</span><br><span class="line">        } <span class="keyword">else</span> {<span class="comment">// nothing}</span></span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    processResponseCommand(ChannelHandlerContext ctx, RemotingCommand cmd){</span><br><span class="line">        -&gt; responseFuture = responsTable.get(cmd.getOpaque)</span><br><span class="line">        -&gt; responseFuture.setResponseCommand(cmd); responseFuture.release</span><br><span class="line">        -&gt; executor.submit  responseFuture.executeInvokeCallback</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    invokeOneway(Channel channel, RemotingCommand request, <span class="keyword">long</span> timeoutMillis) {</span><br><span class="line">        -&gt; request.markOnewayRPC();</span><br><span class="line">        -&gt; semaphoreOneway.tryAcquire(timeoutMillis)</span><br><span class="line">        -&gt; acquired{</span><br><span class="line">            -&gt; SemaphoreReleaseOnlyOnce once = <span class="keyword">new</span> SemaphoreRelease(semaphoreOneway)</span><br><span class="line">            -&gt; channel.writeAndFlush(request).addListener(){operationComplete(){once.release}}</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    invokeAsynImpl(Channel channel, RemotingCommand request, <span class="keyword">long</span> timeouMills, InvokeCallback callback){</span><br><span class="line">        -&gt; acquired = seamphoreAsync.tryAcquire()</span><br><span class="line">        -&gt; SeamphoreReleaseOnlyOnce once = SeamphoreReleaeOnlyOnce(seamphoreAsync);</span><br><span class="line">        -&gt; ResponseFuture(request.getOpaque, timeoutMills, invokeCallback, once) responseFuture</span><br><span class="line">        -&gt; responseTable.put(request.getOpaque, responseFuture)</span><br><span class="line">        -&gt; channel.writeAndFlush(request).addListener(ChannelFutureListener f){</span><br><span class="line">            -&gt; f.isSuccess responseFutrue.setSendRequestOk(<span class="keyword">true</span>)</span><br><span class="line">            -&gt; responsFuture.executeInvokeCallback()</span><br><span class="line">            -&gt; responsFuture.release()</span><br><span class="line">            -&gt; responseTable.remove()</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    scanResponseTable(){</span><br><span class="line">        -&gt; forEntry.reponsTable{</span><br><span class="line">            -&gt; ResponseFuture rep</span><br><span class="line">            -&gt; rep.getBeginTimestamp() + rep.getTimoutMills() + <span class="number">1000</span> &lt;= currentTimeMillis {</span><br><span class="line">                -&gt; expired;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">ReponseFuture{</span><br><span class="line">    Properties{</span><br><span class="line">        <span class="keyword">volatile</span> RemotingCommand responseCommand;</span><br><span class="line">        <span class="keyword">volatile</span> <span class="keyword">boolean</span> sendRequestsOk = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">int</span> opaque</span><br><span class="line">        <span class="keyword">long</span> timeoutMills</span><br><span class="line">        CountDownLatch countDownLatch</span><br><span class="line">        SemaphoreReleaseOnlyOnce once</span><br><span class="line">        AtomicBoolean executeCallbackOnlyOnce;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    executeInvokeCallback(){</span><br><span class="line">        -&gt; executeCallbackOnlyOnce.campreAndSet(<span class="keyword">false</span>,<span class="keyword">true</span>) invokeCallback.operationComplete(<span class="keyword">this</span>)</span><br><span class="line">    }</span><br><span class="line">    <span class="function">RemotingCommand <span class="title">waitResponse</span><span class="params">(<span class="keyword">long</span> timeoutMills)</span></span>{</span><br><span class="line">        -&gt; countDownLatch.awit(timeoutMills)</span><br><span class="line">        -&gt; <span class="keyword">return</span> responseCommand</span><br><span class="line">    }</span><br><span class="line">    putResponse(RemotingCommand responseCommand){</span><br><span class="line">        -&gt; countDownLatch.countDown()</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">SemaphoreReleaseOnlyOnce{</span><br><span class="line">    <span class="function">atomicBoolean released</span><br><span class="line">    Semaphore semaphore</span><br><span class="line">    <span class="title">SemaphoreReleaseOnlyOnce</span><span class="params">(Semaphore semaphore)</span></span><br><span class="line">    <span class="title">release</span><span class="params">()</span></span>{</span><br><span class="line">        released.compareAndSet(<span class="keyword">false</span>, <span class="keyword">true</span>) semaphore.release()</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h4 id="BrokerHousekeepingService"><a href="#BrokerHousekeepingService" class="headerlink" title="BrokerHousekeepingService"></a>BrokerHousekeepingService</h4><p>&#x76D1;&#x542C;Broker&#x4E0E;NameServer&#x7684;&#x8FDE;&#x63A5;&#xFF0C;&#x5B9E;&#x65F6;&#x7684;&#x66F4;&#x65B0;&#x8DEF;&#x7531;&#x4FE1;&#x606F;</p>
+<h2 id="NameServer&#x542F;&#x52A8;&#x6D41;&#x7A0B;"><a href="#NameServer&#x542F;&#x52A8;&#x6D41;&#x7A0B;" class="headerlink" title="NameServer&#x542F;&#x52A8;&#x6D41;&#x7A0B;"></a>NameServer&#x542F;&#x52A8;&#x6D41;&#x7A0B;</h2><h4 id="&#x542F;&#x52A8;&#x6D41;&#x7A0B;&#x56FE;"><a href="#&#x542F;&#x52A8;&#x6D41;&#x7A0B;&#x56FE;" class="headerlink" title="&#x542F;&#x52A8;&#x6D41;&#x7A0B;&#x56FE;"></a>&#x542F;&#x52A8;&#x6D41;&#x7A0B;&#x56FE;</h4><p><img src="/2017/01/07/RocketMQ-Namersrv/Namesrv-start.png" alt=""></p>
+<h4 id="&#x6D41;&#x7A0B;&#x5206;&#x6790;"><a href="#&#x6D41;&#x7A0B;&#x5206;&#x6790;" class="headerlink" title="&#x6D41;&#x7A0B;&#x5206;&#x6790;"></a>&#x6D41;&#x7A0B;&#x5206;&#x6790;</h4><p>&#x7565;</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/RocketMQ/" rel="tag">#RocketMQ</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/06/RocketMQ-Consumer-Message/" rel="next" title="RocketMQ-Consumer-Message">
+                <i class="fa fa-chevron-left"></i> RocketMQ-Consumer-Message
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/07/RocketMQ-Broker/" rel="prev" title="RocketMQ-Broker">
+                RocketMQ-Broker <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/01/07/RocketMQ-Namersrv/"
+     data-title="RocketMQ-Namersrv"
+     data-content=""
+     data-url="https://qiufanghua.github.io/2017/01/07/RocketMQ-Namersrv/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/01/07/RocketMQ-Namersrv/"
+           data-title="RocketMQ-Namersrv" data-url="https://qiufanghua.github.io/2017/01/07/RocketMQ-Namersrv/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/qiufanghua.png"
+               alt="Jone" />
+          <p class="site-author-name" itemprop="name">Jone</p>
+          <p class="site-description motion-element" itemprop="description">用心感受；越有能力才会越平等。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NameServer"><span class="nav-number">1.</span> <span class="nav-text">NameServer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NameServer主要类分析"><span class="nav-number">2.</span> <span class="nav-text">NameServer主要类分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NamesrvStartup"><span class="nav-number">2.0.1.</span> <span class="nav-text">NamesrvStartup</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NamesrvController"><span class="nav-number">2.0.2.</span> <span class="nav-text">NamesrvController</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RouteInfoManager"><span class="nav-number">2.0.3.</span> <span class="nav-text">RouteInfoManager</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Broker配置信息"><span class="nav-number">2.0.3.1.</span> <span class="nav-text">Broker配置信息</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NettyRemotingServer-Client"><span class="nav-number">2.0.4.</span> <span class="nav-text">NettyRemotingServer/Client</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BrokerHousekeepingService"><span class="nav-number">2.0.5.</span> <span class="nav-text">BrokerHousekeepingService</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NameServer启动流程"><span class="nav-number">3.</span> <span class="nav-text">NameServer启动流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#启动流程图"><span class="nav-number">3.0.1.</span> <span class="nav-text">启动流程图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#流程分析"><span class="nav-number">3.0.2.</span> <span class="nav-text">流程分析</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jone</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"qiufanghua1314"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("VswJ7EsUGnDx1i1LQpJLfF98-gzGzoHsz", "vqXsdWRqEYh6zeEzLSk0PPI8");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
